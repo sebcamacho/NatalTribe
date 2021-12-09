@@ -50,6 +50,13 @@ class Creneau
      */
     private $reservations;
 
+    public function __toString()
+    {
+        return $this->date;
+       
+    }
+
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
@@ -148,5 +155,10 @@ class Creneau
         }
 
         return $this;
+    }
+
+    public function compteResa(){
+
+        return count($this->getReservations());
     }
 }

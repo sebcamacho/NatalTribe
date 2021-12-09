@@ -29,6 +29,11 @@ class CategorieCours
      */
     private $cours;
 
+    public function __toString()
+    {
+        return $this->nom;
+    }
+
     public function __construct()
     {
         $this->cours = new ArrayCollection();

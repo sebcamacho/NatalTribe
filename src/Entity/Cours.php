@@ -54,6 +54,13 @@ class Cours
      */
     private $creneaus;
 
+public function __toString()
+    {
+        return $this->nom;
+    }
+
+
+
     public function __construct()
     {
         $this->creneaus = new ArrayCollection();

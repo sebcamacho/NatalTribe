@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créneaux{% endblock %}
+
+{% block body %}
+
+{% if app.session.flashbag.get('message') is defined %} 
+
+{% for item in app.session.flashbag.get('message') %}
+    
+    <p>{{ item }}</p>
+{% endfor %}
+
+
+
+{% endif %}
+
+
+<h3></h3>
+
+{% for creneau in creneaux %}
+
+<div class="container d-flex p-2 bd-highlight">
+<div class="row align-items-start">
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ creneau.cours.nom }}</h5>
+    <p class="card-text">Le {{ creneau.date|date('d-m-Y') }} de {{ creneau.heureDebut|date('H:i') }} à {{ creneau.heureFin|date('H:i') }}</p>
+    <p class="card-text">Lieu : </p>
+    {% if creneau.compteResa < creneau.cours.userMax %}
+
+    <a href="{{ path('get_reservation', {'id' : creneau.id}) }}" class="btn btn-primary">reserver</a>
+    
+    {% else %}
+        
+        <p>Créneau complet</p>
+        
+    {% endif %}
+    
+  </div>
+</div>
+</div>
+</div>
+{% endfor %}
+{% endblock %}
