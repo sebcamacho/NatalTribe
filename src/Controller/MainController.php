@@ -22,7 +22,8 @@ class MainController extends AbstractController
                 'title' => $event->getCours()->getNom(),
                 'start' => $event->getDate()->format('Y-m-d') . ' ' . $event->getHeureDebut()->format('H:i:s'),
                 'end' => $event->getDate()->format('Y-m-d') . ' ' . $event->getHeureFin()->format('H:i:s'),
-                'allDay' => false
+                'allDay' => false,
+                'url' => 'http://127.0.0.1:8000/détail-reservation/' . $event->getId(),
             ];
         }
 

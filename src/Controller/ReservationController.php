@@ -23,16 +23,28 @@ class ReservationController extends AbstractController
         ]);
     }
 
+    #[Route('/détail-reservation/{id}', name: 'reservation_detail')]
+    public function detailResa($id, CreneauRepository $creneauRepository): Response
+    {
+        $creneau = $creneauRepository->find($id);
+        
+        return $this->render('reservation/detail.html.twig', [
+            'creneau' => $creneau
+        ]);
+    }
+
     #[Route('/get-reservation/{id}', name: 'get_reservation')]
     public function getResa($id, CreneauRepository $creneauRepository, EntityManagerInterface $manager, ReservationRepository $reservationRepository): Response
     {
         $reservation = new Reservation;
         $user = $this->getUser();
         $creneau = $creneauRepository->find($id);
+        
         $test = $reservationRepository->findOneBy(['user' => $user, 'creneau' => $creneau]);
         
         if(is_null($test)){
             $reservation->setUser($user)->setCreneau($creneau);
+            $creneau->setNbrReservation(1);
 
         $manager->persist($reservation);
         $manager->flush();

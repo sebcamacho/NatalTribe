@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
-
 {% block body %}
 <style>
 #calendrier{
@@ -25,13 +23,23 @@ window.onload = () =>{
             locale: 'fr',
             timeZone: 'Europe/Paris',
             headerToolbar: {
-                start : 'prev next today',
+                start : 'prev,next today',
                 center : 'title',
                 end : 'dayGridMonth,timeGridWeek,listMonth'
             },
+            buttonText: {
+                prev: 'Précédent',
+                next: 'Suivant',
+                today: "Aujourd'hui",
+                year: 'Année',
+                month: 'Mois',
+                week: 'Semaine',
+                day: 'Jour',
+                list: 'Planning',
+                },
             
-            events: {{ data|raw }},
-
+            
+            events: {{ data|raw }}
             
 
         })

@@ -28,15 +28,8 @@
     <h5 class="card-title">{{ creneau.cours.nom }}</h5>
     <p class="card-text">Le {{ creneau.date|date('d-m-Y') }} de {{ creneau.heureDebut|date('H:i') }} à {{ creneau.heureFin|date('H:i') }}</p>
     <p class="card-text">Lieu : </p>
-    {% if creneau.compteResa < creneau.cours.userMax %}
-
-    <a href="{{ path('get_reservation', {'id' : creneau.id}) }}" class="btn btn-primary">reserver</a>
     
-    {% else %}
-        
-        <p>Créneau complet</p>
-        
-    {% endif %}
+    <a href="{{ path('reservation_detail', {'id' : creneau.id}) }}" class="btn btn-primary">Détail</a>
     
   </div>
 </div>

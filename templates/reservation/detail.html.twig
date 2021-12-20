@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+<pre>
+    {{ dump(creneau) }}
+</pre>
+
+<div class="container">
+<div class="card text-center">
+  <div class="card-header">
+    Réserver un créneau
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ creneau.cours.nom }}</h5>
+    <p class="card-text">{{ creneau.date|date('d-m-Y') }} <br> de <br> {{ creneau.heureDebut|date('H:i') }} à {{ creneau.heureFin|date('H:i') }}</p>
+    {% if creneau.compteResa < creneau.cours.userMax %}
+
+    <a href="{{ path('get_reservation', {'id' : creneau.id}) }}" class="btn btn-primary">reserver</a>
+    
+    
+    {% else %}
+        
+        <p>Créneau complet</p>
+        
+    {% endif %}
+  </div>
+  <div class="card-footer text-muted">
+    Places disponibles : {{ creneau.cours.userMax - creneau.compteResa }}
+  </div>
+</div>
+</div>
+
+{% endblock %}
