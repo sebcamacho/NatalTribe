@@ -24,6 +24,9 @@ class MainController extends AbstractController
                 'end' => $event->getDate()->format('Y-m-d') . ' ' . $event->getHeureFin()->format('H:i:s'),
                 'allDay' => false,
                 'url' => 'http://127.0.0.1:8000/détail-reservation/' . $event->getId(),
+                'backgroundColor' => $event->getCours()->getBgColor(),
+                'borderColor' => $event->getCours()->getBorderColor(),
+                'textColor' => $event->getCours()->getTextColor()
             ];
         }
 
@@ -31,6 +34,8 @@ class MainController extends AbstractController
 
         return $this->render('main/index.html.twig', compact('data'));
     }
+
+    
 
 
 }

@@ -54,6 +54,21 @@ class Cours
      */
     private $creneaus;
 
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $bgColor;
+
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $borderColor;
+
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $textColor;
+
 public function __toString()
     {
         return $this->nom;
@@ -169,6 +184,42 @@ public function __toString()
                 $creneau->setCours(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBgColor(): ?string
+    {
+        return $this->bgColor;
+    }
+
+    public function setBgColor(?string $bgColor): self
+    {
+        $this->bgColor = $bgColor;
+
+        return $this;
+    }
+
+    public function getBorderColor(): ?string
+    {
+        return $this->borderColor;
+    }
+
+    public function setBorderColor(?string $borderColor): self
+    {
+        $this->borderColor = $borderColor;
+
+        return $this;
+    }
+
+    public function getTextColor(): ?string
+    {
+        return $this->textColor;
+    }
+
+    public function setTextColor(?string $textColor): self
+    {
+        $this->textColor = $textColor;
 
         return $this;
     }
