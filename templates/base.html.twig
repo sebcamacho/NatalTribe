@@ -10,6 +10,7 @@
             
             <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
             <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets/css/navbar.css') }}">
         {% endblock %}
 
         {% block javascripts %}
@@ -23,19 +24,26 @@
         {% block navbar %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Nataltribe</a>
+    <a class="navbar-brand" href="{{ path('home') }}">Nataltribe</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ path('home') }}">Accueil</a>
+          <a class="nav-link active" aria-current="page" href="#">Présentation</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Mon approche</a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link" href="{{ path('main') }}">Planning</a>
         </li>
        
         {% if app.user %}
+            
             <li class="nav-item">
-              <a class="nav-link" href="{{ path('main') }}">Planning</a>
+              <a class="nav-link" href="{{ path('account') }}">Mon compte ({{ app.user.prenom }})</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ path('app_logout') }}">logout</a>

@@ -69,6 +69,16 @@ class Cours
      */
     private $textColor;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $prix;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $lieu;
+
 public function __toString()
     {
         return $this->nom;
@@ -220,6 +230,30 @@ public function __toString()
     public function setTextColor(?string $textColor): self
     {
         $this->textColor = $textColor;
+
+        return $this;
+    }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(?float $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getLieu(): ?string
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(?string $lieu): self
+    {
+        $this->lieu = $lieu;
 
         return $this;
     }
