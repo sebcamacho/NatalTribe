@@ -2,21 +2,22 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}NatalTribe{% endblock %}</title>
+        <title>{% block title %}Accueil - NatalTribe{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
             {#{{ encore_entry_link_tags('app') }}#}
             
-            <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+        
             <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
             <link rel="stylesheet" href="{{ asset('assets/css/navbar.css') }}">
-            <link rel="stylesheet" href="{{ asset('assets/css/footer.css') }}">
+            
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
         {% endblock %}
 
         {% block javascripts %}
             {#{{ encore_entry_script_tags('app') }}#}
-            <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+         
             <script src="{{ asset('assets/js/main.js') }}"></script>
             
         {% endblock %}
@@ -31,7 +32,8 @@
 
                 <ul class="dropdown_content">
                     <li><a href="#">Mon approche</a></li>
-                    <li><a href="#">Parcours</a> </li>
+                    <li><a href="#">Parcours</a></li>
+                
                     
                 </ul>
 
@@ -40,9 +42,24 @@
             <li> <a href="">Cours</a></li>
             <li> <a href="">Vidéos</a></li>
             <li> <a href="">Contact</a></li>
+            {% if app.user %}
+            {% else %}
+                
             <li> <a href="{{ path('app_login') }}">Se connecter</a></li>
+            {% endif %}
+            {% if app.user %}
+            <li class="dropdown_nav"> <a class="dropdown_active" href="#"><i class="fas fa-user-circle"></i></a>
+
+                <ul class="dropdown_content">
+                    <li><a href="#">Mes réservations</a></li>
+                    <li><a href="#">Mon Compte</a> </li>
+                    <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                    
+                </ul>
+            {% endif %}
+            
             {% if is_granted('ROLE_ADMIN') %}
-            <li> <a href="{{ path('admin') }}">Administration</a></li>
+            <li> <a href="{{ path('admin') }}">Admin</a></li>
             {% endif %}
         </ul>
 
@@ -53,7 +70,9 @@
 
     {% endblock %}
     
-    {% block body %}{% endblock %}
+    {% block body %}
+   
+    {% endblock %}
 
 
 
