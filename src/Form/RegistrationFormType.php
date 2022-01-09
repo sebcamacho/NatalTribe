@@ -99,7 +99,7 @@ class RegistrationFormType extends AbstractType
                 ],
                 'row_attr' => [
                     'class' => 'form-floating'
-                ],
+                ]
             ])
             ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,

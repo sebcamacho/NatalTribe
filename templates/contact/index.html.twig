@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire de contact - NatalTribe{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
+<main>
+    <h1>formulaire de contact</h1>
+
+    {% for message in app.flashes('notice') %}
+    <div class="alert alert-info"> {{ message }}</div>
+        
+    {% endfor %}
+    <div class="container">
+        <form action="">
+        {{ form_start(contactForm) }}
+            {{ form_row(contactForm.nom) }} <br>
+            {{ form_row(contactForm.email) }} <br>
+            {{ form_row(contactForm.entreprise) }} <br>
+            {{ form_row(contactForm.objet) }} <br>
+            {{ form_widget(contactForm.message) }} <br>
+
+            <button type="submit" class="btn btn-outline-primary">Envoyer</button>
+        {{ form_end(contactForm) }}
+        </form>
+
+    </div>
+</main>
+{% endblock %}
