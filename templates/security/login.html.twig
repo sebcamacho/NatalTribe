@@ -3,6 +3,11 @@
 {% block title %}Se connecter - NataTribe{% endblock %}
 
 {% block body %}
+
+<link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/bootstrap.min.css') }}">
+
+<div class="container">
+<div class="g-col-6 g-col-md-4">
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -15,20 +20,28 @@
     {% endif %}
 
     <h1 class="h3 mb-3 font-weight-normal">Merci de vous connecter</h1>
-    
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
 
+    <div class="form-floating mb-3">
+    <input type="email" value="{{ last_username }}" name="email" id="floatingInput" placeholder="Votre adresse email" class="form-control" autocomplete="email" required autofocus>
+    <label for="floatingInput">Email</label>
+    </div>
    
-    
+    <div class="form-floating mb-3"> 
+    <input type="password" name="password" id="floatingInput" class="form-control" placeholder="Votre mot de passe" autocomplete="current-password" required>
     <label for="inputPassword">Votre mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    </div>
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
 
+  
+
+    <a href="{{ path('account_password') }}">Mot de passe oublié ?</a>
+
     <br>
+    <br>
+    
 
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -41,8 +54,16 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
+    <button class="btn btn-lg btn-outline-primary" type="submit">
         Se connecter
     </button>
 </form>
+
+</div>
+<br>
+    <span>Pas encore de compte ? <a href="{{ path('app_register') }}">Inscrivez vous.</a></span>
+
+    </div>
+
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 {% endblock %}

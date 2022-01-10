@@ -24,7 +24,7 @@ class RegistrationFormType extends AbstractType
         $builder
             
             ->add('nom', TextType::class, [
-                'label' => 'Nom',
+                'label' => 'Nom *',
                 'attr' => [
                     'placeholder' => 'nom'
                 ],
@@ -41,7 +41,7 @@ class RegistrationFormType extends AbstractType
                     ]
             ])
             ->add('prenom', TextType::class, [
-                'label' => 'Prénom',
+                'label' => 'Prénom *',
                 'attr' => [
                     'placeholder' => 'Prénom'
                 ],
@@ -59,7 +59,7 @@ class RegistrationFormType extends AbstractType
                 
             ])
             ->add('telephone', TelType::class, [
-                    'label' => 'Numéro de téléphone',
+                    'label' => 'Numéro de téléphone (nécessaire pour les cours enfants)',
                     'attr' => [
                     'placeholder' => 'Numéro de téléphone'
                 ],
@@ -93,7 +93,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('email', EmailType::class, [
-                'label' => 'E-mail',
+                'label' => 'E-mail *',
                 'attr' => [
                     'placeholder' => 'E-mail'
                 ],
@@ -120,8 +120,8 @@ class RegistrationFormType extends AbstractType
                 ],
                 'invalid_message' => 'Le mot de passe et la confirmation doivent être identique',
                 'required' => true,
-                'first_options' => [ 'label' => 'Mot de passe'],
-                'second_options' => [ 'label' => 'Confirmez votre mot de passe']
+                'first_options' => [ 'label' => 'Mot de passe *'],
+                'second_options' => [ 'label' => 'Confirmez votre mot de passe *']
                 
             ])
             

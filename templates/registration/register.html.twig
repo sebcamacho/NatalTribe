@@ -4,8 +4,8 @@
 
 {% block body %}
 
-<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/bootstrap.min.css') }}">
+
     <h1>Inscription</h1>
 <div class="container">
     {{ form_start(registrationForm) }}
@@ -21,8 +21,10 @@
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn btn-primary">S'inscrire</button>
+        <button type="submit" class="btn btn-lg btn-primary">S'inscrire</button>
     {{ form_end(registrationForm) }}
 
 </div>
+
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 {% endblock %}
