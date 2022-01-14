@@ -54,10 +54,6 @@ class ReservationController extends AbstractController
             $this->addFlash('message', 'Vous avez déjà réservé ce cours' );
         }
         
-
-        
-
-        
         return $this->redirectToRoute('reservation');
     }
 }

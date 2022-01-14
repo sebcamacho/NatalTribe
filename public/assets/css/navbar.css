@@ -1,3 +1,4 @@
+
 :root {
   --fondNav: #bb5454;
   --textColor: white;
@@ -26,7 +27,7 @@ nav {
   position: relative;
 }
 
-/*  */
+
 nav > #logo > img {
   width: 100px;
   margin-top: 10px;

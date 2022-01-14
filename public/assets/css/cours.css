@@ -1,0 +1,93 @@
+:root{
+    --fondNav : #BB5454 ;
+    --textColor : white ;
+    --hoverColor : #F5CAC3 ;
+    --deepBlue : #0B032D ;
+    --greyBg : #f1f1f1;
+    --beige : #f2efeb;
+}
+*{
+    margin: 0;
+    padding: 0;
+    ;
+}
+h1{
+    text-align: center;
+    padding: 100px 0;
+    font-family: 'barlow' !important;
+    color: var(--fondNav);
+    position: relative;
+}
+
+h1::after{
+    content: "";
+    position: absolute;
+    background: var(--fondNav) ;
+    height: 1px;
+    width: 100%;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    animation: h1Anim 3s ease-in-out forwards;
+}
+
+@keyframes h1Anim{
+    100% {
+        transform: translateX(-50%) scaleX(0.8);
+    }
+}
+
+h1::before{
+    content: "";
+    position: absolute;
+    background: var(--fondNav) ;
+    height: 1px;
+    width: 100%;
+    top: 55px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    animation: h1Anim2 3s ease-in-out forwards;
+}
+
+@keyframes h1Anim2{
+    100% {
+        transform: translateX(-50%) scaleX(0.8);
+    }
+}
+
+.cardSection{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    margin: 0 auto;
+    width: 90%;
+    justify-content: space-between;
+}
+.oneCard{
+width: 45%;
+min-width: 378px;
+margin: 0 auto;
+}
+
+@media screen and (max-width : 850px){
+    .oneCard{
+        width: 90%;
+    }
+}
+.card-link{
+    padding: 8px;
+    border-radius: 5px;
+    border: var(--fondNav) 2px;
+    color: white;
+}
+
+.card-link:hover{
+    color: white;
+}
+
+#calendrier{
+    width : 80%;
+    border: solid 1px var(--fondNav);
+    border-radius: 4px;
+    padding: 10px;
+}

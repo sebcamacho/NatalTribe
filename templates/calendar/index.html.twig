@@ -1,0 +1,61 @@
+
+
+    <link rel="stylesheet" href="{{ asset('assets/css/cours.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/V4/bootstrap.css') }}">
+    
+    <link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+
+{% block calendar %}
+    <div class="container" id="calendrier">
+    
+    </div>
+
+
+<script>
+
+window.onload = () =>{
+        let calendarEl = document.querySelector('#calendrier')
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+            themeSystem: 'bootstrap',
+            initialView: 'timeGridView',
+            locale: 'fr',
+            firstDay : 1,
+            timeZone: 'Europe/Paris',
+            headerToolbar: {
+                start : 'prev,next today',
+                center : 'title',
+                end : 'timeGridView,listMonth'
+            },           
+            views : { 
+                timeGridView: {
+                type: 'timeGrid',
+                duration: { days: 7 },
+                hiddenDays : [0],
+                slotMinTime : "08:00:00",
+                slotMaxTime : "21:00:00",
+                slotDuration: "00:30:00",
+                allDaySlot: false,
+                buttonText: 'Semaine'
+                },
+            },
+            buttonText: {
+                prev: '<',
+                next: '>',
+                today: "Aujourd'hui",
+                year: 'Année',
+                month: 'Mois',
+                week: 'Semaine',
+                day: 'Jour',
+                list: 'Liste',
+                },
+            events: {{ data|raw }},
+            
+        })
+        calendar.render()
+    }
+</script>
+
+<script src="{{ asset('assets/js/main.js') }}"></script>
+
+{% endblock %}

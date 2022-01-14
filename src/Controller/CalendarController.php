@@ -2,16 +2,18 @@
 
 namespace App\Controller;
 
+
+use App\Repository\CoursRepository;
 use App\Repository\CreneauRepository;
 use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class MainController extends AbstractController
+class CalendarController extends AbstractController
 {
-    #[Route('/main', name: 'main')]
-    public function index(ReservationRepository $reservationRepository, CreneauRepository $creneauRepository): Response
+    #[Route('/calendar', name: 'calendar')]
+    public function displayCalendar(ReservationRepository $reservationRepository, CreneauRepository $creneauRepository): Response
     {
         $events = $creneauRepository->findAll();
 
@@ -31,11 +33,11 @@ class MainController extends AbstractController
         }
 
         $data = json_encode($rdvs);
+        
+        
 
-        return $this->render('main/index.html.twig', compact('data'));
+        return $this->render('calendar/index.html.twig', compact('data'));
     }
-
-    
 
 
 }
