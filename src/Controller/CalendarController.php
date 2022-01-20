@@ -15,7 +15,9 @@ class CalendarController extends AbstractController
     #[Route('/calendar', name: 'calendar')]
     public function displayCalendar(ReservationRepository $reservationRepository, CreneauRepository $creneauRepository): Response
     {
+        // Penser à récupérer les créneaux futurs
         $events = $creneauRepository->findAll();
+        
 
         $rdvs = [];
         foreach($events as $event){
@@ -25,10 +27,11 @@ class CalendarController extends AbstractController
                 'start' => $event->getDate()->format('Y-m-d') . ' ' . $event->getHeureDebut()->format('H:i:s'),
                 'end' => $event->getDate()->format('Y-m-d') . ' ' . $event->getHeureFin()->format('H:i:s'),
                 'allDay' => false,
-                'url' => 'http://127.0.0.1:8000/détail-reservation/' . $event->getId(),
+                // 'url' => 'http://127.0.0.1:8000/détail-reservation/' . $event->getId(),
                 'backgroundColor' => $event->getCours()->getBgColor(),
                 'borderColor' => $event->getCours()->getBorderColor(),
-                'textColor' => $event->getCours()->getTextColor()
+                'textColor' => $event->getCours()->getTextColor(),
+                
             ];
         }
 

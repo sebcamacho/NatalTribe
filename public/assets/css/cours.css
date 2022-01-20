@@ -91,3 +91,10 @@ margin: 0 auto;
     border-radius: 4px;
     padding: 10px;
 }
+
+.fc-event{
+    cursor: pointer;
+}
+.fc-license-message{
+    display: none;
+}

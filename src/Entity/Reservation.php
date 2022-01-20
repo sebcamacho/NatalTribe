@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\ReservationRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Null_;
 
 /**
  * @ORM\Entity(repositoryClass=ReservationRepository::class)
@@ -29,9 +31,17 @@ class Reservation
      */
     private $user;
 
+    
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+      public function __toString()
+    {
+        return $this->creneau ;
+       
     }
 
     public function getCreneau(): ?Creneau
@@ -56,5 +66,12 @@ class Reservation
         $this->user = $user;
 
         return $this;
+    }
+
+    public function getDateTime(): ?DateTimeInterface
+    {
+        $dateTime = 'Le ' . $this->getCreneau()->getDate()->format('Y-m-d') . ' de ' . $this->getCreneau()->getHeureDebut()->format('H:i') . ' à ' . $this->getCreneau()->getHeureFin()->format('H:i');
+
+        return $this->$dateTime;
     }
 }

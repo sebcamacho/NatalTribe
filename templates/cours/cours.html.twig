@@ -6,12 +6,11 @@
 {% block body %}
     <link rel="stylesheet" href="{{ asset('assets/css/cours.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/bootstrap.css') }}">
-    
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
 <body>
-<pre>
-    {{ dump(cours) }}
-</pre>
+
 {% block main %}
 
     <h1>Planning cours collectifs</h1>
@@ -64,9 +63,9 @@
         <a href="#" class="card-link bg-primary">Reserver</a>
         
         {% else %}
-        <a href="{{path('app_register')}}" class="card-link bg-primary">S'inscrire pour réserver</a>
+        <a href="{{path('app_login')}}" class="card-link bg-primary">Se connecter pour réserver</a>
         {% endif %}    
-        <a href="#" class="card-link bg-primary">Voir les créneaux</a>
+        <a href="#calendrier" class="card-link bg-primary">Voir les créneaux</a>
     </div>
     <div class="card-footer text-muted">
         2 days ago
@@ -96,8 +95,59 @@
         'App\\Controller\\CalendarController::displayCalendar'
     ))
 }} 
+
+<div class="container col-md-5" >
+
+{{ form_start(form) }}
+    {{ form_row(form.creneau) }}
+{{ form_end(form) }}
+</div>
+        
+        <pre>
+            {{ dump(creneaux.1.date) }}
+        </pre>
+
+<div class="container">
+        {% for creneau in creneaux %}
+            
+        
+        <div class="modal fade" id="successModal{{ creneau.id }}" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+        
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+        <div class="modal-body">
+        
+         
+        <p>Créneau du {{ creneau.date|date('d-m-Y') }} <br> de {{ creneau.heureDebut|date('H:i') }} à {{ creneau.heureFin|date('H:i') }}</p>
+
+        <button type="button" class="btn btn-outline-primary btn-block">Ajouter ce créneau</button> ou <br>
+        <button type="button" class="btn btn-outline-primary btn-block">Acheter un pack</button>
+        
+        </div>
+        </div>
+        </div>
+        </div>   
+        {% endfor %}  
+        </div>
+     
+        
 {% endblock %}
 
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(function () {
+    $('.select-creneaux').select2();
+    
+})
+</script>
+
 
 {% endblock %}

@@ -1,0 +1,8 @@
+
+section{
+    z-index: 1;
+    background-color: white;
+    width: 80%;
+    margin: 0 auto;
+    border: solid 2px black;
+}

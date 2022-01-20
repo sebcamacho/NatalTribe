@@ -21,11 +21,13 @@ class Creneau
 
     /**
      * @ORM\Column(type="date")
+     * 
      */
     private $date;
 
     /**
      * @ORM\Column(type="time")
+     * 
      */
     private $heure_debut;
 
@@ -52,7 +54,7 @@ class Creneau
 
     public function __toString()
     {
-        return $this->date;
+        return (string) $this->date;
        
     }
 
@@ -69,6 +71,7 @@ class Creneau
 
     public function getDate(): ?\DateTimeInterface
     {
+        
         return $this->date;
     }
 
@@ -156,6 +159,13 @@ class Creneau
 
         return $this;
     }
+
+    // public function getDateTime(): ?string
+    // {
+    //     $dateTime = 'Le ' . $this->getDate()->format('Y-m-d') . ' de ' . $this->getHeureDebut()->format('H:i') . ' à ' . $this->getHeureFin()->format('H:i');
+
+    //     return $this->$dateTime;
+    // }
 
     public function compteResa(){
 

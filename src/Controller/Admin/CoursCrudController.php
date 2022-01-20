@@ -3,7 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Cours;
+use App\Entity\Reservation;
+use App\Form\ReservationType;
 use App\Repository\CoursRepository;
+use App\Repository\CreneauRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ColorField;
@@ -47,12 +51,31 @@ class CoursCrudController extends AbstractCrudController
     }
 
     #[Route('/cours', name: 'cours')]
-    public function show(CoursRepository $coursRepository){
+    public function show(CoursRepository $coursRepository, CreneauRepository $creneauRepository, Request $request){
+        
         $cours = $coursRepository->findAll();
+        $creneaux = $creneauRepository->findAll();
+        $reservation = new Reservation;
+        $form = $this->createForm(ReservationType::class);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($reservation);
+            $em->flush();
+
+            return $this->redirectToRoute('');
+        }
+
 
         return $this->render('cours/cours.html.twig', [
-            'cours' => $cours
+            'cours' => $cours,
+            'creneaux' => $creneaux,
+            'form' => $form->createView()
         ]);
     }
+
+   
     
 }
