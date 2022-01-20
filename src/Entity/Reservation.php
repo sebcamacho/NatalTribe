@@ -68,9 +68,9 @@ class Reservation
         return $this;
     }
 
-    public function getDateTime(): ?DateTimeInterface
+    public function getDateTime(): ?string
     {
-        $dateTime = 'Le ' . $this->getCreneau()->getDate()->format('Y-m-d') . ' de ' . $this->getCreneau()->getHeureDebut()->format('H:i') . ' à ' . $this->getCreneau()->getHeureFin()->format('H:i');
+        $dateTime = 'Le ' . $this->creneau->getDate()->format('Y-m-d') . ' de ' . $this->creneau->getHeureDebut()->format('H:i') . ' à ' . $this->creneau->getHeureFin()->format('H:i');
 
         return $this->$dateTime;
     }

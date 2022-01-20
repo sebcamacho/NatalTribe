@@ -27,17 +27,20 @@ class Creneau
 
     /**
      * @ORM\Column(type="time")
+     * @ORM\JoinColumn(nullable=true)
      * 
      */
     private $heure_debut;
 
     /**
      * @ORM\Column(type="time")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $heure_fin;
 
     /**
      * @ORM\Column(type="integer")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $nbr_reservation;
 
@@ -160,12 +163,16 @@ class Creneau
         return $this;
     }
 
-    // public function getDateTime(): ?string
-    // {
-    //     $dateTime = 'Le ' . $this->getDate()->format('Y-m-d') . ' de ' . $this->getHeureDebut()->format('H:i') . ' à ' . $this->getHeureFin()->format('H:i');
+    public function getDateTime(): ?string
+    {
 
-    //     return $this->$dateTime;
-    // }
+        $dateY = $this->getDate();
+        $dateY = $dateY->format('Y-m-d');
+
+        // $dateTime = 'Le ' . $this->getDate()->format('Y-m-d') . ' de ' . $this->getHeureDebut()->format('H:i') . ' à ' . $this->getHeureFin()->format('H:i');
+
+        return $this->$dateY;
+    }
 
     public function compteResa(){
 

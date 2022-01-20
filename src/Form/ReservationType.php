@@ -21,15 +21,16 @@ class ReservationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $groupe = new Reservation;
-        // $groupe = $groupe->getDateTime()->format('yyyy-mm-dd');
+        // $groupe = $groupe->getDateTime();
         
+
         $builder
             ->add('creneau', EntityType::class, [
                 'class' => Creneau::class,
                 'attr' =>[
-                    'class'=> 'select-creneaux',
+                    
                     // 'widget' => 'single_text',
-                    // 'format' => 'yyyy-MM-dd'
+                    'format' => 'yyyy-MM-dd'
                 ],
                 
                 'choice_label' => 'id',
