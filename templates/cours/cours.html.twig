@@ -6,7 +6,7 @@
 {% block body %}
     <link rel="stylesheet" href="{{ asset('assets/css/cours.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/bootstrap.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    {# <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> #}
 
 
 <body>
@@ -42,7 +42,7 @@
         Description
       </button>
     </h2>
-    <div id="collapse{{ cour.id }}One" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+    <div id="collapse{{ cour.id }}One" class="accordion-collapse collapse" aria-labelledby="heading" data-bs-parent="#accordionExample" style="">
       <div class="accordion-body">
         <strong>This is the first item's accordion body.</strong> {{cour.description}}
       </div>
@@ -99,12 +99,13 @@
 <div class="container col-md-5" >
 
 {{ form_start(form) }}
+    {{ form_row(form.cours) }}
     {{ form_row(form.creneau) }}
 {{ form_end(form) }}
 </div>
         
         <pre>
-            {{ dump(creneaux.1.date) }}
+            {{ dump(form) }}
         </pre>
 
 <div class="container">
@@ -140,14 +141,9 @@
 {% endblock %}
 
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-$(function () {
-    $('.select-creneaux').select2();
-    
-})
-</script>
+{# <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> #}
+{# <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> #}
+<script src="{{ asset('assets/js/reservation_form.js') }}"></script>
 
 
 {% endblock %}

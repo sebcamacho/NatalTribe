@@ -55,11 +55,14 @@ class Creneau
      */
     private $reservations;
 
-    public function __toString()
-    {
-        return (string) $this->date;
+    // public function __toString()
+    // {
+    //     return $this->date;
+    //     return $this->getDateTime();
+    //     return $this->getHeureDebut();
+    //     return $this->getHeureFin();
        
-    }
+    // }
 
 
     public function __construct()
@@ -166,12 +169,9 @@ class Creneau
     public function getDateTime(): ?string
     {
 
-        $dateY = $this->getDate();
-        $dateY = $dateY->format('Y-m-d');
+        $dateTime = 'Le ' . $this->getDate()->format('d/m/y') . ' de ' . $this->getHeureDebut()->format('H:i') . ' à ' . $this->getHeureFin()->format('H:i');
 
-        // $dateTime = 'Le ' . $this->getDate()->format('Y-m-d') . ' de ' . $this->getHeureDebut()->format('H:i') . ' à ' . $this->getHeureFin()->format('H:i');
-
-        return $this->$dateY;
+        return $dateTime;
     }
 
     public function compteResa(){

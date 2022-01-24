@@ -51,12 +51,14 @@ class CoursCrudController extends AbstractCrudController
     }
 
     #[Route('/cours', name: 'cours')]
-    public function show(CoursRepository $coursRepository, CreneauRepository $creneauRepository, Request $request){
+    public function show( CoursRepository $coursRepository, CreneauRepository $creneauRepository, Request $request){
         
         $cours = $coursRepository->findAll();
         $creneaux = $creneauRepository->findAll();
+        // $creneaus = $coursRepository->findBy(['cours' => 'creneaus']);
+        
         $reservation = new Reservation;
-        $form = $this->createForm(ReservationType::class);
+        $form = $this->createForm(ReservationType::class, $reservation);
 
         $form->handleRequest($request);
 
@@ -72,7 +74,8 @@ class CoursCrudController extends AbstractCrudController
         return $this->render('cours/cours.html.twig', [
             'cours' => $cours,
             'creneaux' => $creneaux,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            
         ]);
     }
 

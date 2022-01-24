@@ -82,6 +82,7 @@ class Cours
 public function __toString()
     {
         return $this->nom;
+        return $this->getCreneaus();
     }
 
 

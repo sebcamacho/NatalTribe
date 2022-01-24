@@ -23,9 +23,9 @@ class CreneauCrudController extends AbstractCrudController
     {
         return [
             
-            DateField::new('date'),
-            TimeField::new('heure_debut')->renderAsChoice(),
-            TimeField::new('heure_fin')->renderAsChoice(),
+            DateField::new('date')->setFormat('short'),
+            TimeField::new('heure_debut')->renderAsChoice()->setFormat('short'),
+            TimeField::new('heure_fin')->renderAsChoice()->setFormat('short'),
             IntegerField::new('nbr_reservation'),
             AssociationField::new('cours'),
             
