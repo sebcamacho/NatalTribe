@@ -1,0 +1,31 @@
+
+h1, p, span{
+    font-family: 'Barlow', sans-serif !important; 
+}
+h1{
+    color:#BB5454;
+    text-align: center;
+    padding-top: 50px;
+}
+
+p{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    font-size: 18px;
+   
+}
+
+.resaRecap{
+    text-align: right;
+   font-size: 18px;
+   margin-bottom: 20px;
+}
+
+.resaButton{
+    margin-bottom: 50px;
+}
+
+
+
+

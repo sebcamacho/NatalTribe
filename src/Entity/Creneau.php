@@ -51,24 +51,22 @@ class Creneau
     private $cours;
 
     /**
-     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="creneau", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="creneau")
      */
     private $reservations;
 
-    // public function __toString()
-    // {
-    //     return $this->date;
-    //     return $this->getDateTime();
-    //     return $this->getHeureDebut();
-    //     return $this->getHeureFin();
-       
-    // }
-
+    /**
+     * @ORM\ManyToOne(targetEntity=Reservation::class, inversedBy="creneaus")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $reservation;
 
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
     }
+
+   
 
     public function getId(): ?int
     {
@@ -112,17 +110,7 @@ class Creneau
         return $this;
     }
 
-    public function getNbrReservation(): ?int
-    {
-        return $this->nbr_reservation;
-    }
-
-    public function setNbrReservation(int $nbr_reservation): self
-    {
-        $this->nbr_reservation = $nbr_reservation;
-
-        return $this;
-    }
+   
 
     public function getCours(): ?Cours
     {
@@ -132,6 +120,43 @@ class Creneau
     public function setCours(?Cours $cours): self
     {
         $this->cours = $cours;
+
+        return $this;
+    }
+
+   
+
+    public function getDateTime(): ?string
+    {
+
+        $dateTime = 'Le ' . $this->getDate()->format('d/m/y') . ' de ' . $this->getHeureDebut()->format('H:i') . ' à ' . $this->getHeureFin()->format('H:i');
+
+        return $dateTime;
+    }
+
+    public function compteResa(){
+
+        return count($this->getReservations());
+    }
+
+
+
+    /**
+     * Get the value of nbr_reservation
+     */ 
+    public function getNbrReservation()
+    {
+        return $this->nbr_reservation;
+    }
+
+    /**
+     * Set the value of nbr_reservation
+     *
+     * @return  self
+     */ 
+    public function setNbrReservation($nbr_reservation)
+    {
+        $this->nbr_reservation = $nbr_reservation;
 
         return $this;
     }
@@ -166,16 +191,15 @@ class Creneau
         return $this;
     }
 
-    public function getDateTime(): ?string
+    public function getReservation(): ?Reservation
     {
-
-        $dateTime = 'Le ' . $this->getDate()->format('d/m/y') . ' de ' . $this->getHeureDebut()->format('H:i') . ' à ' . $this->getHeureFin()->format('H:i');
-
-        return $dateTime;
+        return $this->reservation;
     }
 
-    public function compteResa(){
+    public function setReservation(?Reservation $reservation): self
+    {
+        $this->reservation = $reservation;
 
-        return count($this->getReservations());
+        return $this;
     }
 }

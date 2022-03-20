@@ -6,7 +6,7 @@
 {% block body %}
     <link rel="stylesheet" href="{{ asset('assets/css/cours.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/bootstrap.css') }}">
-    {# <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> #}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 
 <body>
@@ -35,14 +35,14 @@
         <p class="card-text"></p>
     </div>
 
-<div class="accordion" id="accordionExample">
+<div class="accordion" id="accordion{{ cour.id }}">
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingOne">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ cour.id }}One" aria-expanded="false" aria-controls="collapse{{ cour.id }}One">
         Description
       </button>
     </h2>
-    <div id="collapse{{ cour.id }}One" class="accordion-collapse collapse" aria-labelledby="heading" data-bs-parent="#accordionExample" style="">
+    <div id="collapse{{ cour.id }}One" class="accordion-collapse collapse" aria-labelledby="heading" data-bs-parent="#accordion{{ cour.id }}" style="">
       <div class="accordion-body">
         <strong>This is the first item's accordion body.</strong> {{cour.description}}
       </div>
@@ -100,13 +100,17 @@
 
 {{ form_start(form) }}
     {{ form_row(form.cours) }}
-    {{ form_row(form.creneau) }}
+    {{ form_widget(form.creneau) }}
+    
 {{ form_end(form) }}
+
+<pre>
+    {{ dump(form.creneau) }}
+</pre>
+
 </div>
         
-        <pre>
-            {{ dump(form) }}
-        </pre>
+
 
 <div class="container">
         {% for creneau in creneaux %}
@@ -127,8 +131,9 @@
          
         <p>Créneau du {{ creneau.date|date('d-m-Y') }} <br> de {{ creneau.heureDebut|date('H:i') }} à {{ creneau.heureFin|date('H:i') }}</p>
 
-        <button type="button" class="btn btn-outline-primary btn-block">Ajouter ce créneau</button> ou <br>
-        <button type="button" class="btn btn-outline-primary btn-block">Acheter un pack</button>
+
+        <a class="btn btn-outline-primary btn-block" href="{{ path('add_to_cart', {'id' : creneau.id}) }}">Ajouter ce créneau</a> ou<br>
+        <a class="btn btn-outline-primary btn-block" href="">Acheter un pack</a>
         
         </div>
         </div>
@@ -137,13 +142,26 @@
         {% endfor %}  
         </div>
      
-        
+{# {% block tableReservation %}
+{{  
+    render(controller(
+        'App\\Controller\\CartController::index'
+    ))
+}} 
+{% endblock %} #}
 {% endblock %}
 
-<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-{# <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> #}
-{# <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> #}
-<script src="{{ asset('assets/js/reservation_form.js') }}"></script>
 
+
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script src="{{ asset('assets/js/reservation_form.js') }}"></script>
+<script>
+$(function(){
+    $('.select-creneaux').select2();
+})
+</script>
 
 {% endblock %}

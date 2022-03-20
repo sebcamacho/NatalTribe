@@ -22,4 +22,6 @@ cours.addEventListener("change", function () {
     .catch((error) => {
       console.log(error);
     });
+
+
 });

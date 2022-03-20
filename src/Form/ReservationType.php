@@ -4,37 +4,30 @@ namespace App\Form;
 
 use App\Entity\Cours;
 use App\Entity\Creneau;
+use App\Form\CreneauType;
 use App\Entity\Reservation;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
-use App\Form\DataTransformer\Transformer;
-use phpDocumentor\Reflection\Types\Null_;
-use DoctrineExtensions\Query\Mysql\DateFormat;
+
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\CallbackTransformer;
+
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\ChoiceList\ChoiceList;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class ReservationType extends AbstractType
 {
-    // private $transformer;
-
-    // public function __construct(Transformer $transformer)
-    // {
-    //     $this->transformer = $transformer;
-    // }
-
+ 
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-
+            
             ->add('cours', EntityType::class, [
                 'mapped' => false,
                 'class' => Cours::class,
@@ -42,10 +35,46 @@ class ReservationType extends AbstractType
                 'placeholder' => 'Cours',
                 'label' => 'Cours'
             ])
-            ->add('creneau', ChoiceType::class, [
-                'placeholder' => 'Créneaux (Sélectionner un cours ou un créneau dans le calendrier)',
+            ->add('creneau', CollectionType::class, [
+                // 'class' => Creneau::class,
+                'entry_type' => CreneauType::class,
+                // 'entry_options' => [
+                //     'attr' => ['class' => 'select-creneaux']
+                // ],
+                // 'choice_label' => 'datetime',
+                // 'placeholder' => 'Créneaux (Sélectionner un cours ou un créneau dans le calendrier)',
+                // 'multiple' => true,
+                'label' => 'Créneaux',
+                'by_reference' => false,
+                // 'allow_add' => true,
+                // 'allow_delete' => true
+                // 'attr' => [
+                //     'class' => 'select-creneaux'
+                // ],
+                
 
             ])
+
+            // ->add('creneaus', CollectionType::class, [
+            //     'entry_type' => CreneauType::class,
+            //     // 'entry_options' => [
+            //     //     'attr' => ['class' => 'select-creneaux']
+            //     // ],
+            //     'by_reference' => false,
+            //     'allow_add' => true,
+            //     'mapped' => false
+                
+            // ])
+
+            // ->add('creneau', ChoiceType::class, [
+            //     // 'class' => Creneau::class,
+            //     'choice_label' => 'datetime',
+            //     'placeholder' => 'Créneaux (Sélectionner un cours ou un créneau dans le calendrier)',
+                
+                
+                
+                
+            // ])
             ->add('valider', SubmitType::class)
         ;
 
@@ -58,6 +87,18 @@ class ReservationType extends AbstractType
                 'placeholder' => 'Créneaux',
                 'label' => 'créneau',
                 'choices' => $creneaux,
+                'multiple' => true,
+                'by_reference' => false,
+                // 'allow_add' => true,
+                // 'allow_delete' => true
+                'attr' => [
+                    'class' => 'select-creneaux'
+                ],
+               
+              
+                
+                
+                
                 
                 ]);
             };

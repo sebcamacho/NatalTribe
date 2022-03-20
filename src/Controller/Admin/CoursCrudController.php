@@ -7,7 +7,11 @@ use App\Entity\Reservation;
 use App\Form\ReservationType;
 use App\Repository\CoursRepository;
 use App\Repository\CreneauRepository;
+use App\Repository\ReservationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ColorField;
@@ -51,23 +55,50 @@ class CoursCrudController extends AbstractCrudController
     }
 
     #[Route('/cours', name: 'cours')]
-    public function show( CoursRepository $coursRepository, CreneauRepository $creneauRepository, Request $request){
+    public function show(CoursRepository $coursRepository, CreneauRepository $creneauRepository, ReservationRepository $reservationRepository, Request $request, EntityManagerInterface $manager){
         
         $cours = $coursRepository->findAll();
         $creneaux = $creneauRepository->findAll();
-        // $creneaus = $coursRepository->findBy(['cours' => 'creneaus']);
+   
+        
+       
         
         $reservation = new Reservation;
-        $form = $this->createForm(ReservationType::class, $reservation);
+        $reservation->setUser($this->getUser());
+        // $form = $this->createForm(ReservationType::class, $reservation);
+        $forms = [];
+
+        foreach($creneaux as $creneau){
+            $form = $this->createForm(ReservationType::class, $reservation);
+            $forms[$creneau->getId()] = $form->createView();
+        }
+        
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($reservation);
-            $em->flush();
+            
+            
+            // if($reservation->getCreneau()->getNbrReservation() >= $reservation->getCreneau()->getCours()->getUserMax()){
+            //     //message flash pour dire que la reservation de ce cours est impossible
+            // }
 
-            return $this->redirectToRoute('');
+            // Autre condition pour vérifier que l'utilisateur n'a pas déjà réservé le créneau
+
+            $test = $reservationRepository->findOneBy(['user' => $reservation->getUser(), 'creneau' => $reservation->getCreneau()]);
+
+            if(is_null($test)){
+
+            // $reservation->getCreneau()->setNbrReservation(1);
+           
+           
+            $manager->persist($reservation);
+            $manager->flush();
+            
+            return $this->redirectToRoute('cours', [], Response::HTTP_SEE_OTHER);
+            }else{
+                $this->addFlash('message', 'Vous avez déjà réservé ce créneau' );
+            }
         }
 
 
@@ -75,7 +106,6 @@ class CoursCrudController extends AbstractCrudController
             'cours' => $cours,
             'creneaux' => $creneaux,
             'form' => $form->createView(),
-            
         ]);
     }
 
