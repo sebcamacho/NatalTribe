@@ -66,6 +66,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $reservations;
 
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
@@ -237,4 +238,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+
 }

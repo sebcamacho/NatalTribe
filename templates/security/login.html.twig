@@ -1,12 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Se connecter - NataTribe{% endblock %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/bootstrap.min.css') }}">
+{% endblock %}
 {% block body %}
 
-<link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/bootstrap.min.css') }}">
 
-<div class="container">
+
+<div class="container col-sm-6 ">
 <div class="g-col-6 g-col-md-4">
 <form method="post">
     {% if error %}
@@ -65,5 +68,9 @@
 
     </div>
 
-<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 {% endblock %}

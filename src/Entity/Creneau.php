@@ -50,10 +50,6 @@ class Creneau
      */
     private $cours;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="creneau")
-     */
-    private $reservations;
 
     /**
      * @ORM\ManyToOne(targetEntity=Reservation::class, inversedBy="creneaus")

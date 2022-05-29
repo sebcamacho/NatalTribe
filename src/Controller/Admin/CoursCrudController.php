@@ -38,7 +38,6 @@ class CoursCrudController extends AbstractCrudController
          
             TextField::new('nom'),
             AssociationField::new('categorie_cours'),
-            AssociationField::new('type'),
             TextareaField::new('description'),
             MoneyField::new('prix')->setCurrency('EUR'),
             TextareaField::new('lieu')->setLabel('Lieu du cours'),
@@ -63,49 +62,49 @@ class CoursCrudController extends AbstractCrudController
         
        
         
-        $reservation = new Reservation;
-        $reservation->setUser($this->getUser());
-        // $form = $this->createForm(ReservationType::class, $reservation);
-        $forms = [];
+        // $reservation = new Reservation;
+        // $reservation->setUser($this->getUser());
+        // // $form = $this->createForm(ReservationType::class, $reservation);
+        // $forms = [];
 
-        foreach($creneaux as $creneau){
-            $form = $this->createForm(ReservationType::class, $reservation);
-            $forms[$creneau->getId()] = $form->createView();
-        }
+        // foreach($creneaux as $creneau){
+        //     $form = $this->createForm(ReservationType::class, $reservation);
+        //     $forms[$creneau->getId()] = $form->createView();
+        // }
         
 
-        $form->handleRequest($request);
+        // $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        // if($form->isSubmitted() && $form->isValid()){
             
             
-            // if($reservation->getCreneau()->getNbrReservation() >= $reservation->getCreneau()->getCours()->getUserMax()){
-            //     //message flash pour dire que la reservation de ce cours est impossible
-            // }
+        //     // if($reservation->getCreneau()->getNbrReservation() >= $reservation->getCreneau()->getCours()->getUserMax()){
+        //     //     //message flash pour dire que la reservation de ce cours est impossible
+        //     // }
 
-            // Autre condition pour vérifier que l'utilisateur n'a pas déjà réservé le créneau
+        //     // Autre condition pour vérifier que l'utilisateur n'a pas déjà réservé le créneau
 
-            $test = $reservationRepository->findOneBy(['user' => $reservation->getUser(), 'creneau' => $reservation->getCreneau()]);
+        //     $test = $reservationRepository->findOneBy(['user' => $reservation->getUser(), 'creneau' => $reservation->getCreneau()]);
 
-            if(is_null($test)){
+        //     if(is_null($test)){
 
-            // $reservation->getCreneau()->setNbrReservation(1);
+        //     // $reservation->getCreneau()->setNbrReservation(1);
            
            
-            $manager->persist($reservation);
-            $manager->flush();
+        //     $manager->persist($reservation);
+        //     $manager->flush();
             
-            return $this->redirectToRoute('cours', [], Response::HTTP_SEE_OTHER);
-            }else{
-                $this->addFlash('message', 'Vous avez déjà réservé ce créneau' );
-            }
-        }
+        //     return $this->redirectToRoute('cours', [], Response::HTTP_SEE_OTHER);
+        //     }else{
+        //         $this->addFlash('message', 'Vous avez déjà réservé ce créneau' );
+        //     }
+        // }
 
 
         return $this->render('cours/cours.html.twig', [
             'cours' => $cours,
             'creneaux' => $creneaux,
-            'form' => $form->createView(),
+           
         ]);
     }
 

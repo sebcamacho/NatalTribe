@@ -108,7 +108,10 @@ header>span>img{
 }
 
 
-
+p{
+    padding-left: 50px;
+    padding-right: 50px;
+}
 
 .section>h2{
     font-size: 35px;

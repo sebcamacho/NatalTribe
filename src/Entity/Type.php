@@ -56,33 +56,5 @@ class Type
         return $this;
     }
 
-    /**
-     * @return Collection|Cours[]
-     */
-    public function getCours(): Collection
-    {
-        return $this->cours;
-    }
-
-    public function addCour(Cours $cour): self
-    {
-        if (!$this->cours->contains($cour)) {
-            $this->cours[] = $cour;
-            $cour->setType($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCour(Cours $cour): self
-    {
-        if ($this->cours->removeElement($cour)) {
-            // set the owning side to null (unless already changed)
-            if ($cour->getType() === $this) {
-                $cour->setType(null);
-            }
-        }
-
-        return $this;
-    }
+   
 }
