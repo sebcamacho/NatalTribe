@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ asset('assets/css/cours.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.3/jquery-ui.css' rel='stylesheet' />
+
+    
+
+{% endblock %}
+
+{% block body %}
+<h1>{{cours.nom}}</h1>
+
+
+    
+
+
+{{  
+    render(controller(
+        'App\\Controller\\CalendarController::displayCalendarByCours', {'id' : cours.id}
+    ))
+}} 
+
+<div class="container">
+        {% for creneau in creneaux %}
+            
+        
+        <div class="modal fade" id="successModal{{ creneau.id }}" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+        
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+        <div class="modal-body">
+        
+         
+        <p>Créneau du {{ creneau.date|date('d-m-Y') }} <br> de {{ creneau.heureDebut|date('H:i') }} à {{ creneau.heureFin|date('H:i') }}</p>
+
+        {% if app.user %}
+        <a class="btn btn-outline-primary btn-block" href="{{ path('add_to_cart', {'id' : creneau.id}) }}">Ajouter ce créneau</a>
+        {# <a class="btn btn-outline-primary btn-block" href="">Acheter un pack</a> #}
+        
+        {% else %}
+
+        <a href="{{path('app_login')}}" class="btn btn-outline-primary btn-block">Se connecter pour réserver</a>
+
+        {% endif %} 
+        
+        
+        
+        </div>
+        </div>
+        </div>
+        </div>   
+        {% endfor %}  
+        </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/main.js') }}"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{% endblock %}

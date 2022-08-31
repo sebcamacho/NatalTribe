@@ -23,6 +23,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Renderer;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Symfony\Component\DomCrawler\Field\FileFormField;
 
 class CoursCrudController extends AbstractCrudController
 {
@@ -38,7 +39,6 @@ class CoursCrudController extends AbstractCrudController
          
             TextField::new('nom'),
             AssociationField::new('categorie_cours'),
-            AssociationField::new('type'),
             TextareaField::new('description'),
             MoneyField::new('prix')->setCurrency('EUR'),
             TextareaField::new('lieu')->setLabel('Lieu du cours'),
@@ -55,60 +55,33 @@ class CoursCrudController extends AbstractCrudController
     }
 
     #[Route('/cours', name: 'cours')]
-    public function show(CoursRepository $coursRepository, CreneauRepository $creneauRepository, ReservationRepository $reservationRepository, Request $request, EntityManagerInterface $manager){
+    public function showAll(CoursRepository $coursRepository, CreneauRepository $creneauRepository, ReservationRepository $reservationRepository, Request $request, EntityManagerInterface $manager){
         
         $cours = $coursRepository->findAll();
         $creneaux = $creneauRepository->findAll();
-   
-        
-       
-        
-        $reservation = new Reservation;
-        $reservation->setUser($this->getUser());
-        // $form = $this->createForm(ReservationType::class, $reservation);
-        $forms = [];
-
-        foreach($creneaux as $creneau){
-            $form = $this->createForm(ReservationType::class, $reservation);
-            $forms[$creneau->getId()] = $form->createView();
-        }
-        
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-            
-            
-            // if($reservation->getCreneau()->getNbrReservation() >= $reservation->getCreneau()->getCours()->getUserMax()){
-            //     //message flash pour dire que la reservation de ce cours est impossible
-            // }
-
-            // Autre condition pour vérifier que l'utilisateur n'a pas déjà réservé le créneau
-
-            $test = $reservationRepository->findOneBy(['user' => $reservation->getUser(), 'creneau' => $reservation->getCreneau()]);
-
-            if(is_null($test)){
-
-            // $reservation->getCreneau()->setNbrReservation(1);
-           
-           
-            $manager->persist($reservation);
-            $manager->flush();
-            
-            return $this->redirectToRoute('cours', [], Response::HTTP_SEE_OTHER);
-            }else{
-                $this->addFlash('message', 'Vous avez déjà réservé ce créneau' );
-            }
-        }
-
 
         return $this->render('cours/cours.html.twig', [
             'cours' => $cours,
             'creneaux' => $creneaux,
-            'form' => $form->createView(),
+           
         ]);
     }
 
+
+    #[Route('/cours/{id}', name: 'oneCours')]
+    public function showOne($id, CoursRepository $coursRepository, CreneauRepository $creneauRepository){
+        
+        $cours = $coursRepository->find($id);
+       
+        $creneaux = $cours->getCreneaus()->toArray();
+    
+
+        return $this->render('cours/vue-cours.html.twig', [
+            'cours' => $cours,
+            'creneaux' => $creneaux,
+           
+        ]);
+    }
    
     
 }

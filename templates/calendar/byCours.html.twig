@@ -1,0 +1,61 @@
+
+<link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/V4/bootstrap.css') }}">
+
+    <style>
+    .fc-event{cursor: pointer;}
+    .fc-license-message{display: none;}
+
+    </style>
+
+<div class="container col-md-7" id="calendrier"></div>
+
+
+<script>
+
+window.onload = () =>{
+        let calendarEl = document.querySelector('#calendrier')
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+            themeSystem: 'bootstrap',
+            initialView: 'dayGridMonth',
+            locale: 'fr',
+            firstDay : 1,
+            timeZone: 'Europe/Paris',
+            headerToolbar: {
+                start : 'prev,next today',
+                center : 'title',
+                end : 'dayGridMonth,listMonth'
+            },           
+            views : { 
+                timeGridView: {
+                type: 'timeGrid',
+                duration: { days: 7 },
+                hiddenDays : [0],
+                slotMinTime : "08:00:00",
+                slotMaxTime : "21:00:00",
+                slotDuration: "00:30:00",
+                allDaySlot: false,
+                buttonText: 'Semaine'
+                },
+            },
+            buttonText: {
+                prev: '<',
+                next: '>',
+                today: "Aujourd'hui",
+                year: 'Année',
+                month: 'Mois',
+                week: 'Semaine',
+                day: 'Jour',
+                list: 'Liste',
+                },
+            events: {{ data|raw }},
+            eventClick : function(info) {
+                
+            $("#successModal" + info.event.id).modal("show");
+            $("#successModal"+ info.event.id + " h5").text(info.event.title);
+            }
+        })
+        calendar.render()
+    }
+
+    
+</script>

@@ -24,10 +24,7 @@ class Cours
      */
     private $nom;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="cours")
-     */
-    private $type;
+
 
     /**
      * @ORM\ManyToOne(targetEntity=CategorieCours::class, inversedBy="cours")
@@ -109,17 +106,7 @@ public function __toString()
         return $this;
     }
 
-    public function getType(): ?Type
-    {
-        return $this->type;
-    }
 
-    public function setType(?Type $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
 
     public function getCategorieCours(): ?CategorieCours
     {

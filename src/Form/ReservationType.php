@@ -28,16 +28,15 @@ class ReservationType extends AbstractType
     {
         $builder
             
-            ->add('cours', EntityType::class, [
-                'mapped' => false,
-                'class' => Cours::class,
-                'choice_label' => 'nom',
-                'placeholder' => 'Cours',
-                'label' => 'Cours'
-            ])
-            ->add('creneau', CollectionType::class, [
+            // ->add('cours', EntityType::class, [
+            //     'mapped' => false,
+            //     'class' => Cours::class,
+            //     'choice_label' => 'nom',
+            //     'placeholder' => 'Cours',
+            //     'label' => 'Cours'
+            // ])
+            ->add('creneau', textt::class, [
                 // 'class' => Creneau::class,
-                'entry_type' => CreneauType::class,
                 // 'entry_options' => [
                 //     'attr' => ['class' => 'select-creneaux']
                 // ],
@@ -54,62 +53,38 @@ class ReservationType extends AbstractType
                 
 
             ])
-
-            // ->add('creneaus', CollectionType::class, [
-            //     'entry_type' => CreneauType::class,
-            //     // 'entry_options' => [
-            //     //     'attr' => ['class' => 'select-creneaux']
-            //     // ],
-            //     'by_reference' => false,
-            //     'allow_add' => true,
-            //     'mapped' => false
-                
-            // ])
-
-            // ->add('creneau', ChoiceType::class, [
-            //     // 'class' => Creneau::class,
-            //     'choice_label' => 'datetime',
-            //     'placeholder' => 'Créneaux (Sélectionner un cours ou un créneau dans le calendrier)',
-                
-                
-                
                 
             // ])
             ->add('valider', SubmitType::class)
         ;
 
-        $formModifier = function(FormInterface $form, Cours $cours = null){
-                $creneaux = (null === $cours) ? [] : $cours->getCreneaus();
+        // $formModifier = function(FormInterface $form, Cours $cours = null){
+        //         $creneaux = (null === $cours) ? [] : $cours->getCreneaus();
 
-                $form->add('creneau', EntityType::class, [
-                'class' => Creneau::class,
-                'choice_label' => 'datetime',
-                'placeholder' => 'Créneaux',
-                'label' => 'créneau',
-                'choices' => $creneaux,
-                'multiple' => true,
-                'by_reference' => false,
-                // 'allow_add' => true,
-                // 'allow_delete' => true
-                'attr' => [
-                    'class' => 'select-creneaux'
-                ],
-               
-              
-                
-                
-                
-                
-                ]);
-            };
+        //         $form->add('creneau', EntityType::class, [
+        //         'class' => Creneau::class,
+        //         'choice_label' => 'datetime',
+        //         'placeholder' => 'Créneaux',
+        //         'label' => 'créneau',
+        //         'choices' => $creneaux,
+        //         'multiple' => true,
+        //         'by_reference' => false,
+        //         // 'allow_add' => true,
+        //         // 'allow_delete' => true
+        //         'attr' => [
+        //             'class' => 'select-creneaux'
+        //         ],
 
-            $builder->get('cours')->addEventListener(
-                FormEvents::POST_SUBMIT,
-                function (FormEvent $event) use ($formModifier){
-                    $cours = $event->getForm()->getData();
-                    $formModifier($event->getForm()->getParent(), $cours);
-                }
-            );
+            //     ]);
+            // };
+
+            // $builder->get('cours')->addEventListener(
+            //     FormEvents::POST_SUBMIT,
+            //     function (FormEvent $event) use ($formModifier){
+            //         $cours = $event->getForm()->getData();
+            //         $formModifier($event->getForm()->getParent(), $cours);
+            //     }
+            // );
 
         
 

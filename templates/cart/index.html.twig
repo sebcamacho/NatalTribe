@@ -1,22 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mes reservations - NatalTribe{% endblock %}
+{% block title %}Mon panier - NatalTribe{% endblock %}
 
-
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('assets/css/mesReservations.css')}}">
+<link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/bootstrap.css') }}">
+{% endblock %}
 
 {% block body %}
 <body>
     
-<link rel="stylesheet" href="{{ asset('assets/css/mesReservations.css')}}">
-<link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/bootstrap.css') }}">
 
 
 
 
-{% block tableReservation %}
+<h1>Mon panier</h1>
+<p>Retrouvez l'ensemble des réservations que vous avez ajouté au panier.</p>
 
-<h1>Mes reservations</h1>
-<p>Retrouvez l'ensemble des réservations que vous avez ajouté.</p>
+<div class="container col-sm-6">
 {% if cart|length > 0 %}
     <div class="container">
     <table class="table table-hover">
@@ -32,6 +34,9 @@
     </thead>
     <tbody>
     {% set total = null %}
+        <pre>
+            {{ dump(cart) }}
+        </pre>
     {% for resa in cart %}
 
         
@@ -55,27 +60,33 @@
     <span> <b> Nombre de creneaux : </b> {{ cart|length}} </span> <br>
     <span><b>Total :</b> {{(total / 100)|number_format(2, ',', '.')}} € </span>
     </div>
-
+   
 
     <div class="d-grid gap-2 container resaButton">
-    <a href="" class="btn btn-lg btn-primary">Réserver</a>
-    
+    <a href=" {{ path('get_reservation') }} " class="btn btn-lg btn-primary">Valider et payer</a>
+ 
     </div>
+   
 
 {% else %}
 <hr>
 
 <p><b>Vous n'avez réservé aucun créneau.</b></p>
+
+<hr>
+
+<p>Rendez-vous sur la page de cours pour reserver un créneau <a class="btn btn-outline-primary" href="{{ path('cours') }}"> ICI </a> </p>
 {% endif %}
+</div>
+
+
+    
 
 {% endblock %}
 
-    
+{% block javascripts %}
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </body>
 <script src="https://kit.fontawesome.com/52c511fed8.js" crossorigin="anonymous"></script>
 {% endblock %}
-
-
-

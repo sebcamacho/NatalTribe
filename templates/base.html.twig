@@ -7,75 +7,37 @@
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
             {#{{ encore_entry_link_tags('app') }}#}
-            
+            <link rel="shortcut icon" type="image/jpg" href="{{ asset('assets/images/logo_nt.jpg') }}"/>
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"> 
             <link rel="stylesheet" href="{{ asset('assets/css/navbar.css') }}">
-            
-            
+            <link rel="stylesheet" href="{{ asset('assets/css/footer.css') }}">
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+            
         {% endblock %}
 
         {% block javascripts %}
             {#{{ encore_entry_script_tags('app') }}#}
-         
-            
-            
         {% endblock %}
     </head>
     <body>
 
-    {% block navbar %}
-    <nav>
-        <a id="logo" href="{{ path('home') }}"> <img src="{{ asset('assets/images/logo_sans_bg.png')}}" alt=""> </a>
-        <ul class="nav-links">
-            <li class="dropdown_nav"> <a class="dropdown_active" href="#">À propos</a>
+    {% include "shared/_navbar.html.twig" %}
 
-                <ul class="dropdown_content">
-                    <li><a href="{{ path('approche') }}">Mon approche</a></li>
-                    <li><a href="{{ path('parcours') }}">Parcours</a></li>
-                
-                    
-                </ul>
-
-            </li>
-
-            <li> <a href="{{ path('cours') }}">Cours</a></li>
-            <li> <a href="">Vidéos</a></li>
-            <li> <a href="{{ path('contact') }}">Contact</a></li>
-            {% if app.user %}
-            {% else %}
-                
-            <li> <a href="{{ path('app_login') }}">Se connecter</a></li>
-            {% endif %}
-            {% if app.user %}
-            <li class="dropdown_nav"> <a class="dropdown_active" href="#"><i class="fas fa-user-circle"></i></a>
-
-                <ul class="dropdown_content">
-                    <li><a href="{{ path('cart') }}">Mes réservations</a></li>
-                    <li><a href="#">Mon Compte</a> </li>
-                    <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
-                    
-                </ul>
-            {% endif %}
-            
-            {% if is_granted('ROLE_ADMIN') %}
-            <li> <a href="{{ path('admin') }}">Admin</a></li>
-            {% endif %}
-        </ul>
-
-        <div class="burger">
-            <span> </span>
+    {% for rubrique, messages in app.flashes %}
+        <div class="alert alert-{{rubrique}}">
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
         </div>
-    </nav>
-
-    {% endblock %}
+    {% endfor %}
     
     {% block body %}
    
     {% endblock %}
-
+  
+    {% include "shared/_footer.html.twig" %}
 
 
 <script src="{{ asset('assets/js/menu.js') }}"></script>

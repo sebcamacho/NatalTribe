@@ -26,7 +26,7 @@ class CreneauCrudController extends AbstractCrudController
             DateField::new('date')->setFormat('short'),
             TimeField::new('heure_debut')->renderAsChoice()->setFormat('short'),
             TimeField::new('heure_fin')->renderAsChoice()->setFormat('short'),
-            IntegerField::new('nbr_reservation'),
+            IntegerField::new('nbr_reservation')->setValue(0)->hideOnForm(),
             AssociationField::new('cours'),
             
         ];

@@ -2,14 +2,16 @@
 
 namespace App\Controller;
 
+use App\Service\Cart;
+use App\Entity\Creneau;
 use App\Entity\Reservation;
-use App\Repository\CreneauRepository;
-use App\Repository\ReservationRepository;
 use Doctrine\ORM\EntityManager;
+use App\Repository\CreneauRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ReservationRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ReservationController extends AbstractController
 {
@@ -33,27 +35,40 @@ class ReservationController extends AbstractController
         ]);
     }
 
-    #[Route('/get-reservation/{id}', name: 'get_reservation')]
-    public function getResa($id, CreneauRepository $creneauRepository, EntityManagerInterface $manager, ReservationRepository $reservationRepository): Response
+    #[Route('/get-reservation', name: 'get_reservation')]
+    public function getResa(EntityManagerInterface $manager, Cart $panier, ReservationRepository $reservationRepository): Response
     {
-        $reservation = new Reservation;
         $user = $this->getUser();
-        $creneau = $creneauRepository->find($id);
+        $reservation = new Reservation;
+        $reservation->setUser($user);
         
-        $test = $reservationRepository->findOneBy(['user' => $user, 'creneau' => $creneau]);
-        
-        if(is_null($test)){
-            $reservation->setUser($user)->setCreneau($creneau);
-            $creneau->setNbrReservation(1);
+        foreach ($panier->getDetailedCart() as $oneCreneau) {
 
-        $manager->persist($reservation);
-        $manager->flush();
+            /** @var Creneau*/
+            $creneau = $oneCreneau['creneau'];
+            
+                if($creneau->getNbrReservation() >= $creneau->getCours()->getUserMax()){
+                //message flash pour dire que la reservation de ce cours est impossible
+                $this->addFlash('warning', 'La limite de participants pour le créneau est atteinte, veuillez choisir un autre créneau');
+            }
 
-        }else{
+            $test = $reservationRepository->findOneBy(['user' => $user, 'creneau' => $creneau]);
 
-            $this->addFlash('message', 'Vous avez déjà réservé ce cours' );
+            if(is_null($test)){
+                $reservation = new Reservation;
+                $reservation->setCreneau($creneau)->setUser($user);
+                $creneau->setNbrReservation(1);
+                $manager->persist($reservation);}
+            else{
+                $this->addFlash('warning', "Vous avez déjà réservé ce créneau");
+            }
         }
         
-        return $this->redirectToRoute('reservation');
+        $manager->flush();
+
+        $panier->remove();
+        
+        return $this->redirectToRoute('cart');
+
     }
 }

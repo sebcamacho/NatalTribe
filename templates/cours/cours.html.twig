@@ -2,18 +2,17 @@
 
 {% block title %}Planning cours - NatalTribe{% endblock %}
 
-
-{% block body %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('assets/css/cours.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/bootstrap.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
+{% endblock %}
 
-<body>
+{% block body %}
 
-{% block main %}
-
-    <h1>Planning cours collectifs</h1>
+    <h1>Les cours collectifs</h1>
 
 <div class="cardSection">
 
@@ -24,7 +23,7 @@
     <h3 class="card-header text-white"  style="background-color:{{ cour.bgColor }};">{{cour.nom}}</h3>
     <div class="card-body">
         <h5 class="card-title">{{cour.categorieCours}}</h5>
-        <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+    
     </div>
     <img src="{{ asset('assets/images/' ~ cour.image) }}" alt="" class="card-img-top w-50 m-auto"> 
         <rect width="100%" height="100%" fill="#868e96"></rect>
@@ -44,7 +43,7 @@
     </h2>
     <div id="collapse{{ cour.id }}One" class="accordion-collapse collapse" aria-labelledby="heading" data-bs-parent="#accordion{{ cour.id }}" style="">
       <div class="accordion-body">
-        <strong>This is the first item's accordion body.</strong> {{cour.description}}
+        {{cour.description}}
       </div>
     </div>
   </div>
@@ -60,12 +59,12 @@
     
     <div class="card-body">
         {% if app.user %}
-        <a href="#" class="card-link bg-primary">Reserver</a>
+     
         
         {% else %}
-        <a href="{{path('app_login')}}" class="card-link bg-primary">Se connecter pour réserver</a>
+        <a href="{{path('app_login')}}" class="card-link">Se connecter pour réserver</a>
         {% endif %}    
-        <a href="#calendrier" class="card-link bg-primary">Voir les créneaux</a>
+        <a href="{{ path('oneCours', {'id' : cour.id}) }}" class="card-link">Voir les créneaux</a>
     </div>
     <div class="card-footer text-muted">
         2 days ago
@@ -76,37 +75,18 @@
 {% endfor %}
 </div>
 
-{% endblock %}
+
+
+
 {# {{  
-    render(controller(
-        'App\\Controller\\MainController::index'
-    ))
-}} #}
-
-{# <div class="container" id="calendrier">
-    
-    </div> #}
-
-{# {{ include("main/index.html.twig", {'data': 'data'}) }} #}
-
-{% block calendar %}
-{{  
     render(controller(
         'App\\Controller\\CalendarController::displayCalendar'
     ))
-}} 
+}}  #}
+
+{# {% include "calendar/index.html.twig" with {"data": "data"} %} #}
 
 <div class="container col-md-5" >
-
-{{ form_start(form) }}
-    {{ form_row(form.cours) }}
-    {{ form_widget(form.creneau) }}
-    
-{{ form_end(form) }}
-
-<pre>
-    {{ dump(form.creneau) }}
-</pre>
 
 </div>
         
@@ -131,9 +111,16 @@
          
         <p>Créneau du {{ creneau.date|date('d-m-Y') }} <br> de {{ creneau.heureDebut|date('H:i') }} à {{ creneau.heureFin|date('H:i') }}</p>
 
-
+        {% if app.user %}
         <a class="btn btn-outline-primary btn-block" href="{{ path('add_to_cart', {'id' : creneau.id}) }}">Ajouter ce créneau</a> ou<br>
         <a class="btn btn-outline-primary btn-block" href="">Acheter un pack</a>
+        {% else %}
+
+        <a href="{{path('app_login')}}" class="btn btn-outline-primary btn-block">Se connecter pour réserver</a>
+
+        {% endif %} 
+        
+        
         
         </div>
         </div>
@@ -141,27 +128,13 @@
         </div>   
         {% endfor %}  
         </div>
-     
-{# {% block tableReservation %}
-{{  
-    render(controller(
-        'App\\Controller\\CartController::index'
-    ))
-}} 
-{% endblock %} #}
+
 {% endblock %}
+
+{% block javascripts %}
 
 
 
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-<script src="{{ asset('assets/js/reservation_form.js') }}"></script>
-<script>
-$(function(){
-    $('.select-creneaux').select2();
-})
-</script>
 
 {% endblock %}

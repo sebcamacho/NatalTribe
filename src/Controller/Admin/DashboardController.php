@@ -41,8 +41,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Cours');
 
         yield MenuItem::linkToCrud('Cours', 'fas fa-user-friends', Cours::class);
-        yield MenuItem::linkToCrud('Catégorie cours', 'fas fa-list', CategorieCours::class);
-        yield MenuItem::linkToCrud('Type cours', 'fas fa-list', Type::class);    
+        yield MenuItem::linkToCrud('Catégorie cours', 'fas fa-list', CategorieCours::class);  
         yield MenuItem::linkToCrud('Créneaux', 'fas fa-calendar', Creneau::class);
 
         yield MenuItem::section('Vidéos');

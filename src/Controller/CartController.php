@@ -2,56 +2,58 @@
 
 namespace App\Controller;
 
-use App\Entity\Creneau;
 use App\Repository\CreneauRepository;
 use App\Service\Cart;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
 {
-    #[Route('/mes-reservations', name: 'cart')]
-    public function index( Cart $cart, CreneauRepository $creneauRepository): Response
+    #[Route('/mon-panier', name: 'cart')]
+    public function showDetailedCart( Cart $cart, CreneauRepository $creneauRepository): Response
     {
-        $allResa = [];
-
         
-        if($cart->get()){
-        foreach($cart->get() as $id => $value){
-            $creneau_object = $creneauRepository->findOneBy(['id' => $id]);
+       
+        $detailResa = [];
 
-            if(!$creneau_object){
-                $cart->delete($id);
-                continue;
-            }
-
-            $allResa[] = [
-                
-                'creneau' => $creneau_object,
+        foreach($cart->get('cart') as $id => $value){
+            $detailResa[]=[
+                'creneau' => $creneauRepository->find($id),
                 'value' => $value
             ];
         }
-        }
         
-      
         return $this->render('cart/index.html.twig', [
-            'cart' => $allResa
+            'cart' => $detailResa
         ]);
     }
 
     #[Route('/cart/add/{id}', name: 'add_to_cart')]
-    public function add(Cart $cart, $id): Response
-    {
+    public function add($id, Cart $cart, CreneauRepository $creneauRepository, SessionInterface $session): Response
+    {   
+        $getCoursId = $creneauRepository->find($id)->getCours()->getId();
+        
+        
+        if(array_key_exists($id, $cart->get())){
+        $this->addFlash('warning', 'vous avez déjà ajouté ce créneau');
+    }else{
         $cart->add($id);
-        return $this->redirectToRoute('cart');
+        $this->addFlash("success", "La réservation a bien été ajoutée au panier");
+        
+    }
+
+    return $this->redirectToRoute('oneCours', [
+        'id' => $getCoursId
+    ]);
     }
 
     #[Route('/cart/remove', name: 'remove_my_cart')]
     public function remove(Cart $cart): Response
     {
         $cart->remove();
+        $this->addFlash("success", "Les reservations ont bien été supprimées");
         return $this->redirectToRoute('cart');
     }
 
@@ -59,7 +61,10 @@ class CartController extends AbstractController
     public function delete($id, Cart $cart): Response
     {
         $cart->delete($id);
+
+        $this->addFlash("success", "La reservation a bien été supprimée");
        
         return $this->redirectToRoute('cart');
     }
+    
 }

@@ -4,16 +4,18 @@
 
 {% block body %}
 <link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">
 
 
 <main>
-    <h1>formulaire de contact</h1>
+    <h1>Formulaire de contact</h1>
+    <p>Une demande particulière ? Besoin de plus d'information ? N'hésitez pas à nous écrire via le formulaire. Nous vous répondrons dans les plus brefs délais.</p>
 
     {% for message in app.flashes('notice') %}
     <div class="alert alert-info"> {{ message }}</div>
         
     {% endfor %}
-    <div class="container">
+    <div class="container size">
         <form action="">
         {{ form_start(contactForm) }}
             {{ form_row(contactForm.nom) }} <br>

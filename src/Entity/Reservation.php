@@ -35,15 +35,7 @@ class Reservation
      */
     private $creneau;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Creneau::class, mappedBy="reservation")
-     */
-    private $creneaus;
 
-    public function __construct()
-    {
-        $this->creneaus = new ArrayCollection();
-    }
 
  
 
@@ -93,34 +85,5 @@ class Reservation
         return $this;
     }
 
-    /**
-     * @return Collection|Creneau[]
-     */
-    public function getCreneaus(): Collection
-    {
-        return $this->creneaus;
-    }
-
-    public function addCreneau(Creneau $creneau): self
-    {
-        if (!$this->creneaus->contains($creneau)) {
-            $this->creneaus[] = $creneau;
-            $creneau->setReservation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCreneau(Creneau $creneau): self
-    {
-        if ($this->creneaus->removeElement($creneau)) {
-            // set the owning side to null (unless already changed)
-            if ($creneau->getReservation() === $this) {
-                $creneau->setReservation(null);
-            }
-        }
-
-        return $this;
-    }
 
 }

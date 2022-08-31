@@ -27,7 +27,6 @@ class CalendarController extends AbstractController
                 'start' => $event->getDate()->format('Y-m-d') . ' ' . $event->getHeureDebut()->format('H:i:s'),
                 'end' => $event->getDate()->format('Y-m-d') . ' ' . $event->getHeureFin()->format('H:i:s'),
                 'allDay' => false,
-                // 'url' => 'http://127.0.0.1:8000/détail-reservation/' . $event->getId(),
                 'backgroundColor' => $event->getCours()->getBgColor(),
                 'borderColor' => $event->getCours()->getBorderColor(),
                 'textColor' => $event->getCours()->getTextColor(),
@@ -39,7 +38,38 @@ class CalendarController extends AbstractController
         
         
 
-        return $this->render('calendar/index.html.twig', compact('data'));
+        return $this->render('calendar/all.html.twig', compact('data'));
+    }
+
+    #[Route('/calendar/{id}', name: 'oneCoursCalendar')]
+    public function displayCalendarByCours($id, CoursRepository $coursRepository): Response
+    {
+        $cour = $coursRepository->find($id);
+       
+        $crenauCours = $cour->getCreneaus()->toArray();
+   
+    
+
+        $rdvs = [];
+        foreach($crenauCours as $event){
+            $rdvs [] = [
+                'id' => $event->getId(),
+                'title' => $event->getCours()->getNom(),
+                'start' => $event->getDate()->format('Y-m-d') . ' ' . $event->getHeureDebut()->format('H:i:s'),
+                'end' => $event->getDate()->format('Y-m-d') . ' ' . $event->getHeureFin()->format('H:i:s'),
+                'allDay' => false,
+                'backgroundColor' => $event->getCours()->getBgColor(),
+                'borderColor' => $event->getCours()->getBorderColor(),
+                'textColor' => $event->getCours()->getTextColor(),
+                
+            ];
+        }
+
+        $data = json_encode($rdvs);
+        
+        
+
+        return $this->render('calendar/byCours.html.twig', compact('data'));
     }
 
 

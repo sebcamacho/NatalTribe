@@ -1,8 +1,36 @@
 
-section{
-    z-index: 1;
-    background-color: white;
-    width: 80%;
+body{
+
+    background-color: #0d172a !important;
+}
+
+.approche{
+
+    background-color: #f2efeb;
+    width: 70%;
     margin: 0 auto;
-    border: solid 2px black;
+    border: solid 1px #bb5454;
+    border-radius: 5px;
+    margin-bottom: 50px;
+    padding: 20px;
+    padding-bottom: 100px;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.75);
+}
+
+.approche>p{
+    font-family: 'Barlow', sans-serif;
+    min-width: 85%;
+    font-weight: 400;
+    text-align: justify;
+}
+
+.approcheTitle{
+    color: #bb5454;
+    text-align: center;
+    
+    padding: 20px 0;
+    font-family: 'barlow' !important;
+  
 }

@@ -5,9 +5,10 @@
 {% block body %}
 
 <link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">
 
     <h1>Inscription</h1>
-<div class="container">
+<div class="container size">
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.nom) }} <br>
         {{ form_row(registrationForm.prenom) }} <br>
@@ -21,7 +22,7 @@
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn btn-lg btn-primary">S'inscrire</button>
+        <button type="submit" class="btn btn-lg btn-outline-primary">S'inscrire</button>
     {{ form_end(registrationForm) }}
 
 </div>
