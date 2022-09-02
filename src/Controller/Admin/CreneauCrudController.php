@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class CreneauCrudController extends AbstractCrudController
 {
@@ -21,12 +22,13 @@ class CreneauCrudController extends AbstractCrudController
     
     public function configureFields(string $pageName): iterable
     {
+    
         return [
             
             DateField::new('date')->setFormat('short'),
             TimeField::new('heure_debut')->renderAsChoice()->setFormat('short'),
             TimeField::new('heure_fin')->renderAsChoice()->setFormat('short'),
-            IntegerField::new('nbr_reservation')->setValue(0)->hideOnForm(),
+            IntegerField::new('nbr_reservation')->setFormTypeOption('data', '0'),
             AssociationField::new('cours'),
             
         ];

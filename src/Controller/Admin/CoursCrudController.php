@@ -3,27 +3,30 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Cours;
+use App\Entity\Creneau;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
 use App\Repository\CoursRepository;
 use App\Repository\CreneauRepository;
-use App\Repository\ReservationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ReservationRepository;
+use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Common\Collections\ArrayCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ColorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
+use Symfony\Component\DomCrawler\Field\FileFormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use SebastianBergmann\CodeCoverage\Report\Html\Renderer;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use Symfony\Component\DomCrawler\Field\FileFormField;
+use Symfony\Component\Validator\Constraints\Date;
 
 class CoursCrudController extends AbstractCrudController
 {
@@ -36,12 +39,12 @@ class CoursCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-         
+      
             TextField::new('nom'),
             AssociationField::new('categorie_cours'),
-            TextareaField::new('description'),
+            TextEditorField::new('description'),
             MoneyField::new('prix')->setCurrency('EUR'),
-            TextareaField::new('lieu')->setLabel('Lieu du cours'),
+            TextEditorField::new('lieu')->setLabel('Lieu du cours'),
             ImageField::new('image')
                 ->setBasePath('assets/images/')
                 ->setUploadDir('public/assets/images/')
@@ -74,11 +77,21 @@ class CoursCrudController extends AbstractCrudController
         $cours = $coursRepository->find($id);
        
         $creneaux = $cours->getCreneaus()->toArray();
-    
+
+        foreach ($creneaux as $creneau) {
+            
+            /** @var Creneau */
+            $creneauDate = $creneau;
+            $creneauDate = $creneauDate->getDate();
+
+        }
+        $dayDate = new DateTime();
 
         return $this->render('cours/vue-cours.html.twig', [
             'cours' => $cours,
             'creneaux' => $creneaux,
+            'creneauDate' => $creneauDate,
+            'dayDate' => $dayDate
            
         ]);
     }

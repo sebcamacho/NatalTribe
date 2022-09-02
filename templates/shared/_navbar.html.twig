@@ -24,11 +24,12 @@
             <li class="dropdown_nav"> <a class="dropdown_active" href="#"><i class="fas fa-user-circle"></i></a>
 
                 <ul class="dropdown_content">
-                    <li><a href="#">Mes réservations</a></li>
-                    <li><a href="#">Mon Compte</a> </li>
+                    <li><a href="{{ path('reservation') }}">Mes réservations</a></li>
+                    <li><a href="{{ path('account') }}">Mon Compte</a> </li>
                     <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
                     
                 </ul>
+            </li>
             <li> <a href="{{ path('cart') }}"> <i class='fas fa-cart-arrow-down'></i></a> </li>
             {% endif %}
             

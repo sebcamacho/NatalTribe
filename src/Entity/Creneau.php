@@ -44,23 +44,31 @@ class Creneau
      */
     private $nbr_reservation;
 
+    
     /**
      * @ORM\ManyToOne(targetEntity=Cours::class, inversedBy="creneaus")
      * @ORM\JoinColumn(nullable=false)
      */
     private $cours;
 
-
     /**
-     * @ORM\ManyToOne(targetEntity=Reservation::class, inversedBy="creneaus")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="creneau")
      */
-    private $reservation;
+    private $reservations;
 
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
     }
+
+
+
+
+
+    // public function __construct()
+    // {
+    //     $this->reservations = new ArrayCollection();
+    // }
 
    
 
@@ -187,15 +195,6 @@ class Creneau
         return $this;
     }
 
-    public function getReservation(): ?Reservation
-    {
-        return $this->reservation;
-    }
+   
 
-    public function setReservation(?Reservation $reservation): self
-    {
-        $this->reservation = $reservation;
-
-        return $this;
-    }
 }

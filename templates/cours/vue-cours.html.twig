@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
+{% block title %}{{ cours.nom }}{% endblock %}
+
 
 {% block stylesheets %}
     {{ parent() }}
     <link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
-    <link rel="stylesheet" href="{{ asset('assets/css/cours.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/vueCours.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/V4/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
     <link href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.3/jquery-ui.css' rel='stylesheet' />
 
@@ -16,8 +18,13 @@
 <h1>{{cours.nom}}</h1>
 
 
-    
-
+{% if app.user %}
+<p id="bookIt">Sélectionnez un créneau sur le calendrier pour l'ajouter au panier</p>
+{% else %}
+  
+<p>Connectez vous ou veuillez vous inscrire pour réserver un créneau</p>
+{% endif %}
+<section id="booking">
 
 {{  
     render(controller(
@@ -25,14 +32,24 @@
     ))
 }} 
 
+<div id="calendrier">
+</div>
+
+<section id="cart">
+    <p id="description">
+      {{ cours.description|raw }}
+    </p>
+    <p>Prix pour un créneau d'une heure : {{cours.prix / 100}} €.</p>
+</section>
+
+</section>
 <div class="container">
         {% for creneau in creneaux %}
             
-        
+        {# Modale activée par JS dans byCours.html #}
         <div class="modal fade" id="successModal{{ creneau.id }}" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
         
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-dialog" role="document"><div class="modal-content">
         <div class="modal-header">
         <h5 class="modal-title">Modal title</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
@@ -42,18 +59,29 @@
         <div class="modal-body">
         
          
-        <p>Créneau du {{ creneau.date|date('d-m-Y') }} <br> de {{ creneau.heureDebut|date('H:i') }} à {{ creneau.heureFin|date('H:i') }}</p>
+        <p>Créneau du {{ creneau.date|date('d-m-Y') }} <br> de {{ creneau.heureDebut|date('H:i') }} à {{ creneau.heureFin|date('H:i') }} <br> Prix : {{ creneau.cours.prix / 100 }} €</p>
 
+        
+            
+         
         {% if app.user %}
+        {% if creneauDate <= dayDate %}
+          
+          <p> Ce créneau est déjà passé</p>
+
+          <button class="btn btn-outline-primary btn-block" disabled>Ajouter ce créneau</button>
+         
+          {% else %}
+            
         <a class="btn btn-outline-primary btn-block" href="{{ path('add_to_cart', {'id' : creneau.id}) }}">Ajouter ce créneau</a>
         {# <a class="btn btn-outline-primary btn-block" href="">Acheter un pack</a> #}
-        
+        {% endif %}
         {% else %}
 
         <a href="{{path('app_login')}}" class="btn btn-outline-primary btn-block">Se connecter pour réserver</a>
 
         {% endif %} 
-        
+      
         
         
         </div>

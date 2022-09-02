@@ -1,11 +1,12 @@
 
-h1, p, span{
+h3, p, span{
     font-family: 'Barlow', sans-serif !important; 
 }
-h1{
+h3{
     color:#BB5454;
     text-align: center;
     padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 p{

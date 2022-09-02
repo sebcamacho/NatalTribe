@@ -31,7 +31,7 @@ class CartController extends AbstractController
     }
 
     #[Route('/cart/add/{id}', name: 'add_to_cart')]
-    public function add($id, Cart $cart, CreneauRepository $creneauRepository, SessionInterface $session): Response
+    public function add($id, Cart $cart, CreneauRepository $creneauRepository): Response
     {   
         $getCoursId = $creneauRepository->find($id)->getCours()->getId();
         
@@ -62,7 +62,7 @@ class CartController extends AbstractController
     {
         $cart->delete($id);
 
-        $this->addFlash("success", "La reservation a bien été supprimée");
+        $this->addFlash("success", "La reservation a été supprimée");
        
         return $this->redirectToRoute('cart');
     }

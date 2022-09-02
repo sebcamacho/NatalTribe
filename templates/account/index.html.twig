@@ -1,15 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon compte - NatalTribe{% endblock %}
+{% block Title %}Mon compte - Natatribe{% endblock %}
+
 
 {% block body %}
 <h1>Mon compte</h1>
-Bienvenue {{ app.user.prenom }} dans votre compte. <br>
-Dans cet espace vous auez accès à vos réservations et achats de vidéos.
+Bienvenue <strong>{{ app.user.prenom }}</strong> dans votre compte. <br>
+
+<pre>
+    {{ dump(app.user) }}
+</pre>
+
 
 <hr>
 - <a href="{{ path('account_password') }}"> Modifier mot de passe </a><br>
 - Mes réservations en cours <br>
-- Mes vidéos
+
 
 {% endblock %}

@@ -1,0 +1,65 @@
+:root {
+  --fondNav: #bb5454;
+  --textColor: white;
+  --hoverColor: #f5cac3;
+  --deepBlue: #0b032d;
+  --greyBg: #f1f1f1;
+  --beige: #f2efeb;
+}
+
+h1{
+  font-family: 'barlow' !important;
+  text-align: center;
+  margin-top: 40px !important;
+  color: var(--fondNav);
+}
+#bookIt{
+  font-family: 'barlow' !important;
+  text-align: center;
+  color: var(--fondNav);
+  font-weight: 400;
+  font-size: 20px;
+  margin-top: 20px;
+}
+#booking {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin-top: 30px;
+  font-family: 'barlow' !important;
+  
+}
+#cart > ul{
+  background-color: var(--beige);
+  padding: 20px;
+  padding-left: 60px;
+  border-radius: 4px;
+}
+#cart > ul:nth-child(9)>li{
+  padding: 5px;
+}
+#cart {
+  color: var(--fondNav);
+  width: 100%;
+  padding: 40px;
+  padding-top: 0;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+#calendrier {
+  width: 80%;
+  border: solid 1px var(--fondNav);
+  border-radius: 4px;
+  padding: 10px;
+  max-height: 480px;
+
+ 
+}
+
+.fc-event {
+  cursor: pointer;
+}
+.fc-license-message {
+  display: none;
+}

@@ -30,16 +30,12 @@ class Reservation
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Creneau::class, inversedBy="reservations")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=Creneau::class, inversedBy="reservations", fetch="EAGER")
      */
     private $creneau;
 
 
 
- 
-
-    
 
     public function getId(): ?int
     {
@@ -73,6 +69,11 @@ class Reservation
     //     return $this->$dateTime;
     // }
 
+    public function getCreneauByResa(): ?Creneau
+    {
+        return $this->creneau;
+    }
+
     public function getCreneau(): ?Creneau
     {
         return $this->creneau;
@@ -85,5 +86,6 @@ class Reservation
         return $this;
     }
 
-
+  
+ 
 }

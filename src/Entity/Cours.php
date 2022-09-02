@@ -47,7 +47,7 @@ class Cours
     private $user_max;
 
     /**
-     * @ORM\OneToMany(targetEntity=Creneau::class, mappedBy="cours", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Creneau::class, mappedBy="cours", orphanRemoval=true, fetch="EAGER")
      */
     private $creneaus;
 
