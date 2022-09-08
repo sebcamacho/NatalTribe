@@ -58,12 +58,7 @@
 </div>
     
     <div class="card-body">
-        {% if app.user %}
-     
         
-        {% else %}
-        <a href="{{path('app_login')}}" class="card-link">Se connecter pour réserver</a>
-        {% endif %}    
         <a href="{{ path('oneCours', {'id' : cour.id}) }}" class="card-link">Voir les créneaux</a>
     </div>
     <div class="card-footer text-muted">
@@ -75,59 +70,6 @@
 {% endfor %}
 </div>
 
-
-
-
-{# {{  
-    render(controller(
-        'App\\Controller\\CalendarController::displayCalendar'
-    ))
-}}  #}
-
-{# {% include "calendar/index.html.twig" with {"data": "data"} %} #}
-
-<div class="container col-md-5" >
-
-</div>
-        
-
-
-<div class="container">
-        {% for creneau in creneaux %}
-            
-        
-        <div class="modal fade" id="successModal{{ creneau.id }}" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
-        
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"></span>
-        </button>
-      </div>
-        <div class="modal-body">
-        
-         
-        <p>Créneau du {{ creneau.date|date('d-m-Y') }} <br> de {{ creneau.heureDebut|date('H:i') }} à {{ creneau.heureFin|date('H:i') }}</p>
-
-        {% if app.user %}
-        <a class="btn btn-outline-primary btn-block" href="{{ path('add_to_cart', {'id' : creneau.id}) }}">Ajouter ce créneau</a> ou<br>
-        <a class="btn btn-outline-primary btn-block" href="">Acheter un pack</a>
-        {% else %}
-
-        <a href="{{path('app_login')}}" class="btn btn-outline-primary btn-block">Se connecter pour réserver</a>
-
-        {% endif %} 
-        
-        
-        
-        </div>
-        </div>
-        </div>
-        </div>   
-        {% endfor %}  
-        </div>
 
 {% endblock %}
 

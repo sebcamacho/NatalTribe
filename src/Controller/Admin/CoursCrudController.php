@@ -58,21 +58,20 @@ class CoursCrudController extends AbstractCrudController
     }
 
     #[Route('/cours', name: 'cours')]
-    public function showAll(CoursRepository $coursRepository, CreneauRepository $creneauRepository, ReservationRepository $reservationRepository, Request $request, EntityManagerInterface $manager){
+    public function showAll(CoursRepository $coursRepository){
         
         $cours = $coursRepository->findAll();
-        $creneaux = $creneauRepository->findAll();
+   
 
         return $this->render('cours/cours.html.twig', [
-            'cours' => $cours,
-            'creneaux' => $creneaux,
+            'cours' => $cours
            
         ]);
     }
 
 
     #[Route('/cours/{id}', name: 'oneCours')]
-    public function showOne($id, CoursRepository $coursRepository, CreneauRepository $creneauRepository){
+    public function showOne($id, CoursRepository $coursRepository){
         
         $cours = $coursRepository->find($id);
        

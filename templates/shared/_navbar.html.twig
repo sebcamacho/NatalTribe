@@ -1,15 +1,16 @@
+ {% block stylesheets %}
+
+<link rel="stylesheet" href="{{ asset('assets/css/navbar.css') }}">
+{% endblock %}
+ 
  <nav>
         <a id="logo" href="{{ path('home') }}"> <img src="{{ asset('assets/images/logo_sans_bg.png')}}" alt=""> </a>
         <ul class="nav-links">
             <li class="dropdown_nav"> <a class="dropdown_active" href="#">À propos</a>
-
                 <ul class="dropdown_content">
                     <li><a href="{{ path('approche') }}">Mon approche</a></li>
                     <li><a href="{{ path('parcours') }}">Parcours</a></li>
-                
-                    
                 </ul>
-
             </li>
 
             <li> <a href="{{ path('cours') }}">Cours</a></li>
@@ -17,22 +18,18 @@
             <li> <a href="{{ path('contact') }}">Contact</a></li>
             {% if app.user %}
             {% else %}
-                
             <li> <a href="{{ path('app_login') }}">Se connecter</a></li>
             {% endif %}
             {% if app.user %}
             <li class="dropdown_nav"> <a class="dropdown_active" href="#"><i class="fas fa-user-circle"></i></a>
-
                 <ul class="dropdown_content">
                     <li><a href="{{ path('reservation') }}">Mes réservations</a></li>
                     <li><a href="{{ path('account') }}">Mon Compte</a> </li>
                     <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
-                    
                 </ul>
             </li>
             <li> <a href="{{ path('cart') }}"> <i class='fas fa-cart-arrow-down'></i></a> </li>
             {% endif %}
-            
             {% if is_granted('ROLE_ADMIN') %}
             <li> <a href="{{ path('admin') }}">Admin</a></li>
             {% endif %}
@@ -42,3 +39,5 @@
             <span> </span>
         </div>
     </nav>
+
+    <script src="{{ asset('assets/js/menu.js') }}"></script>

@@ -257,6 +257,26 @@ p{
   
 }
 
+@media screen and (max-width: 768px) {
+    .section>h2{
+    font-size: 30px;
+   
+    padding: 10px 10px;
+    }
+    .sectionImp>p{
+        padding-left: 50px;
+        padding-right: 50px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+    .sectionPair>p{
+        padding-left: 50px;
+        padding-right: 50px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+}
+
 
 
 

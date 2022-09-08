@@ -15,7 +15,6 @@ class CartController extends AbstractController
     public function showDetailedCart( Cart $cart, CreneauRepository $creneauRepository): Response
     {
         
-       
         $detailResa = [];
 
         foreach($cart->get('cart') as $id => $value){
@@ -35,13 +34,11 @@ class CartController extends AbstractController
     {   
         $getCoursId = $creneauRepository->find($id)->getCours()->getId();
         
-        
         if(array_key_exists($id, $cart->get())){
-        $this->addFlash('warning', 'vous avez déjà ajouté ce créneau');
+        $this->addFlash('warning', 'Vous avez déjà ajouté ce créneau');
     }else{
         $cart->add($id);
         $this->addFlash("success", "La réservation a bien été ajoutée au panier");
-        
     }
 
     return $this->redirectToRoute('oneCours', [

@@ -23,6 +23,7 @@ h1{
 }
 #booking {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   padding: 20px;
   margin-top: 30px;
@@ -39,21 +40,25 @@ h1{
   padding: 5px;
 }
 #cart {
+
   color: var(--fondNav);
   width: 100%;
+  min-width: 500px;
   padding: 40px;
   padding-top: 0;
   font-weight: 500;
   font-size: 20px;
+  
 }
 
 #calendrier {
+
   width: 80%;
   border: solid 1px var(--fondNav);
   border-radius: 4px;
   padding: 10px;
-  max-height: 480px;
-
+  height: 480px;
+  flex: 500px;
  
 }
 
@@ -62,4 +67,28 @@ h1{
 }
 .fc-license-message {
   display: none;
+}
+
+@media screen and (max-width: 768px){
+  #booking{
+    display: block;
+    flex-direction: column;
+    padding: 0;
+    min-height: 500px;
+  }
+  #calendrier{
+    width: 100%;
+    padding: 0;
+  }
+#cart{
+  min-width: 400px;
+}
+#fc-dom-1{
+  font-size: 20px;
+}
+.modal-content{
+  width: 40% !important;
+ margin-top: 430px;
+}
+
 }

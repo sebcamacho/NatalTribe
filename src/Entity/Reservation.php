@@ -14,14 +14,13 @@ use phpDocumentor\Reflection\Types\Null_;
  */
 class Reservation
 {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
-
-
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reservations")
@@ -61,13 +60,6 @@ class Reservation
 
         return $this;
     }
-
-    // public function getDateTime(): ?string
-    // {
-    //     $dateTime = 'Le ' . $this->creneau->getDate()->format('Y-m-d') . ' de ' . $this->creneau->getHeureDebut()->format('H:i') . ' à ' . $this->creneau->getHeureFin()->format('H:i');
-
-    //     return $this->$dateTime;
-    // }
 
     public function getCreneauByResa(): ?Creneau
     {

@@ -1,6 +1,6 @@
 // declare une constante
 
-const navtoto = () => {
+const navbar = () => {
   const btnresponsive = document.querySelector(".burger");
   // le premier element document selecteur css
   const nav = document.querySelector(".nav-links");
@@ -15,4 +15,4 @@ const navtoto = () => {
   });
 };
 
-navtoto();
+navbar();

@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
+{% block title %}Accueil - NatalTribe{% endblock %}
 
-
-{% block body %}
+{% block stylesheets %}
+{{ parent() }}
 <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}">
-
+{% endblock %}
+{% block body %}
 
 <img id="yoga_bg_fixed" src="{{ asset('assets/images/yoga1.jpg')}}" alt="logo animé natal tribe">
 <header>
@@ -23,7 +25,6 @@
     
     </section>
 
-    
     <section class="sectionPair section">
         <h2>Bienfaits du yoga pré natal</h2>
         <div class="article">
@@ -56,16 +57,16 @@
         <article>
         <section>
             <p>Les séances de yoga postnatal sont conçues spécialement pour les femmes qui ont accouché, par voie basse ou par césarienne, et qui peuvent être pratiquées avant même la rééducation périnéale.
-<br><br>
-Ce yoga spécifique vous permet de vous réapproprier votre corps souvent oublié après la naissance du bébé. Lui qui a pourtant fourni beaucoup d'efforts et vécu des changements internes immenses.
-<br><br>
-On cherche à accompagner votre corps dans sa récupération, soutenir et ramener vers le centre les organes et les muscles complètement relâchés après l'accouchement et refermer le bassin et les côtes, pour éviter un diastasis par exemple.
-<br><br>
-C'est un outil précieux voire nécessaire pour votre avenir gynécologique et sexuel.
-<br><br>
-Vous apprendrez aussi à préserver votre périnée, à utiliser de bons réflexes posturaux avec votre bébé, à refaire une ceinture abdominale et vous remuscler sans risque.
-<br><br>
-Et bien sûr, c'est aussi un instant de partage et de détente entre mères, qui peuvent venir accompagnées de leur bébé.</p>
+            <br><br>
+            Ce yoga spécifique vous permet de vous réapproprier votre corps souvent oublié après la naissance du bébé. Lui qui a pourtant fourni beaucoup d'efforts et vécu des changements internes immenses.
+            <br><br>
+            On cherche à accompagner votre corps dans sa récupération, soutenir et ramener vers le centre les organes et les muscles complètement relâchés après l'accouchement et refermer le bassin et les côtes, pour éviter un diastasis par exemple.
+            <br><br>
+            C'est un outil précieux voire nécessaire pour votre avenir gynécologique et sexuel.
+            <br><br>
+            Vous apprendrez aussi à préserver votre périnée, à utiliser de bons réflexes posturaux avec votre bébé, à refaire une ceinture abdominale et vous remuscler sans risque.
+            <br><br>
+            Et bien sûr, c'est aussi un instant de partage et de détente entre mères, qui peuvent venir accompagnées de leur bébé.</p>
         </section>
         <figure>
         <img src="{{ asset('assets/images/postnatal_edited.jpg')}}" alt="">
@@ -87,10 +88,6 @@ Et bien sûr, c'est aussi un instant de partage et de détente entre mères, qui
             </figure>
         </article>
     </section>
-    
-    
-    
 </main>
-
 
 {% endblock %}

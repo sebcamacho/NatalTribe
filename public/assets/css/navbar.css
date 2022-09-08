@@ -149,7 +149,7 @@ nav > ul > li > a:hover {
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {
   .nav-links {
     position: absolute;
     padding-left: 4px;

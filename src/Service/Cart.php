@@ -63,7 +63,6 @@ class Cart
         $cart =$this->session->get('cart', []);
 
         unset($cart[$id]);
-        
 
         return $this->session->set('cart', $cart);
     }

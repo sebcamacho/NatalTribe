@@ -1,10 +1,12 @@
 footer{
     background-color: #bb5454;
     min-height: 100px;
+  
     width: 100%;
     display: flex;
     padding-top: 0px;
     font-family: 'barlow' !important;
+    
     
 }
 
@@ -13,9 +15,10 @@ footer>section{
     display: flex;
     width: 100%;
     justify-content: space-evenly;
+   
 }
 
-footer>section>section>h3{
+footer>section>section>h4{
     text-align: center;
 }
 

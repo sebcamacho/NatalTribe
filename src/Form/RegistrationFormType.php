@@ -84,14 +84,15 @@ class RegistrationFormType extends AbstractType
                     'required' => false
             ])
             ->add('agreeTerms', CheckboxType::class, [
-                'label' => "J'accepte",
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
+                    'label' => "J'accepte",
+                    'constraints' => [
+                        new IsTrue([
+                            'message' => 'Vous devez accepter les termes.',
+                        ])],
+                    'mapped' => false
+                    ])
+         
+
             ->add('email', EmailType::class, [
                 'label' => 'E-mail *',
                 'attr' => [
@@ -123,11 +124,9 @@ class RegistrationFormType extends AbstractType
                 'first_options' => [ 'label' => 'Mot de passe *'],
                 'second_options' => [ 'label' => 'Confirmez votre mot de passe *']
                 
-            ])
+            ]);
             
-        ;
     }
-
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

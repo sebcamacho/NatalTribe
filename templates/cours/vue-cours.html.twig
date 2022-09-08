@@ -21,8 +21,7 @@
 {% if app.user %}
 <p id="bookIt">Sélectionnez un créneau sur le calendrier pour l'ajouter au panier</p>
 {% else %}
-  
-<p>Connectez vous ou veuillez vous inscrire pour réserver un créneau</p>
+<p id="bookIt">Connectez vous ou veuillez vous inscrire pour réserver un créneau</p>
 {% endif %}
 <section id="booking">
 
@@ -31,6 +30,7 @@
         'App\\Controller\\CalendarController::displayCalendarByCours', {'id' : cours.id}
     ))
 }} 
+
 
 <div id="calendrier">
 </div>
@@ -43,7 +43,7 @@
 </section>
 
 </section>
-<div class="container">
+<div class="container popup">
         {% for creneau in creneaux %}
             
         {# Modale activée par JS dans byCours.html #}
