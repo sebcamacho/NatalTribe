@@ -59,9 +59,9 @@ class RegistrationFormType extends AbstractType
                 
             ])
             ->add('telephone', TelType::class, [
-                    'label' => 'Numéro de téléphone (nécessaire pour les cours enfants)',
+                    'label' => 'Numéro de téléphone',
                     'attr' => [
-                    'placeholder' => 'Numéro de téléphone'
+                    'placeholder' => 'Numéro de téléphone  (nécessaire pour les cours enfants)'
                 ],
                 'row_attr' => [
                     'class' => 'form-floating'

@@ -12,18 +12,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class CartController extends AbstractController
 {
     #[Route('/mon-panier', name: 'cart')]
-    public function showDetailedCart( Cart $cart, CreneauRepository $creneauRepository): Response
+    public function showDetailedCart( Cart $cart): Response
     {
-        
-        $detailResa = [];
+        $detailResa = $cart->getDetailedCart();
 
-        foreach($cart->get('cart') as $id => $value){
-            $detailResa[]=[
-                'creneau' => $creneauRepository->find($id),
-                'value' => $value
-            ];
-        }
-        
         return $this->render('cart/index.html.twig', [
             'cart' => $detailResa
         ]);

@@ -1,7 +1,6 @@
- {% block stylesheets %}
 
 <link rel="stylesheet" href="{{ asset('assets/css/navbar.css') }}">
-{% endblock %}
+
  
  <nav>
         <a id="logo" href="{{ path('home') }}"> <img src="{{ asset('assets/images/logo_sans_bg.png')}}" alt=""> </a>
@@ -39,5 +38,7 @@
             <span> </span>
         </div>
     </nav>
-
-    <script src="{{ asset('assets/js/menu.js') }}"></script>
+{% block javascripts %}
+     <script src="{{ asset('assets/js/menu.js') }}"></script>
+        {% endblock %}
+    

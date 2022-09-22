@@ -1,3 +1,4 @@
+
 h1{
     color: #bb5454;
     text-align: center;
@@ -53,12 +54,34 @@ p{
     min-width: 60%;
     max-width: 65%;
 }
+.contact{
+    display: flex;
+}
 .size{
-    margin-top: 50px;
-    min-width: 60%;
-    max-width: 65%;
+    width: 65%;
+    margin: 100px auto;
     border: solid 1px #bb5454;;
     padding: 20px;
     border-radius: 5px;
-    margin-bottom: 100px;
+}
+
+@media only screen and (max-width: 768px){
+    main{
+        padding-top: 80px;
+    }
+    p{
+        font-size: 15px;
+    }
+    h1{
+        font-size: 20px;
+        padding: 70px 0;
+        margin-top: 0;
+    }
+    .size{
+       
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    
+    }
 }

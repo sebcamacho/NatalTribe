@@ -8,6 +8,7 @@
 
 
 <main>
+    <p class="space"></p>
     <h1>Formulaire de contact</h1>
     <p>Une demande particulière ? Besoin de plus d'information ? N'hésitez pas à nous écrire via le formulaire. Nous vous répondrons dans les plus brefs délais.</p>
 
@@ -15,7 +16,8 @@
     <div class="alert alert-info"> {{ message }}</div>
         
     {% endfor %}
-    <div class="container size">
+    <div class="contact">
+    <div class="size">
         <form action="">
         {{ form_start(contactForm) }}
             {{ form_row(contactForm.nom) }} <br>
@@ -28,6 +30,7 @@
         {{ form_end(contactForm) }}
         </form>
 
+    </div>
     </div>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 </main>

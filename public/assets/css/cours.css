@@ -65,15 +65,13 @@ h1::before{
 }
 .oneCard{
 width: 45%;
-min-width: 378px;
+min-width: 290px;
 margin: 0 auto;
 }
 
-@media screen and (max-width : 850px){
-    .oneCard{
-        width: 90%;
-    }
-}
+
+
+
 .card-link{
     padding: 8px;
     border-radius: 5px;
@@ -104,4 +102,13 @@ margin: 0 auto;
 }
 .fc-license-message{
     display: none;
+}
+
+@media screen and (max-width : 768px){
+    main{
+        padding-top: 100px;
+    }
+    .oneCard{
+        width: 90%;
+    }
 }

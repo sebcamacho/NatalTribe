@@ -7,8 +7,9 @@
 <link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">
 
+<main>
     <h1>Inscription</h1>
-<div class="container size">
+<div class="container col-sm-6 size">
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.nom) }} <br>
         {{ form_row(registrationForm.prenom) }} <br>
@@ -26,6 +27,6 @@
     {{ form_end(registrationForm) }}
 
 </div>
-
+</main>
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 {% endblock %}
