@@ -159,7 +159,7 @@ p{
 
 .sectionPair{
   background: white;
-  min-height: 800px;
+  min-height: 400px;
   
   
 }
@@ -245,18 +245,38 @@ p{
     flex : 550px;
 }
 
-.cours>article>section>p{
+.cours>p{
     padding: 10px 100px;
     font-size: 20px;
     font-weight: 500;
-    text-align: justify;
+    text-align: center;
     color: var(--fondNav);
-    margin-top: 50px;
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
     line-height: 1.5;
     max-width: 1500px;
     margin: 0 auto;
     justify-content: space-around;
   
+}
+
+.cours>a{
+  
+    font-size: 24px;
+    padding: 8px;
+    border-radius: 5px;
+    border:solid 2px var(--fondNav);
+    background-color: white;
+    text-decoration: none;
+    color: var(--fondNav);
+}
+
+.cours>a:hover{
+    background-color: var(--fondNav);
+   color: white;
+   font-size: 26px;
+   transition: 0.3s;
+
 }
 
 @media only screen and (max-width: 768px) {
@@ -294,6 +314,13 @@ p{
         padding-right: 10px;
         margin-top: 50px;
         margin-bottom: 50px;
+    }
+    .cours>p{
+        padding: 10px 10px;
+    }
+
+    .cours{
+        margin-bottom: 30px;
     }
   
 

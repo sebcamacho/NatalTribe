@@ -57,6 +57,10 @@ p{
 .contact{
     display: flex;
 }
+.contact>iframe{
+    margin: auto;
+    margin-bottom: 50px;
+}
 .size{
     width: 65%;
     margin: 100px auto;

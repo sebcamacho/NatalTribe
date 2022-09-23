@@ -2,15 +2,22 @@
 
 {% block Title %}Mon compte - Natatribe{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/bootswatch/dist/journal/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">
+{% endblock %}
 
 {% block body %}
 <h1>Mon compte</h1>
-Bienvenue <strong>{{ app.user.prenom }}</strong> dans votre compte. <br>
+<p>Bienvenue <strong>{{ app.user.prenom }}</strong> dans votre compte. </p><br>
 
 
 <hr>
 - <a href="{{ path('account_password') }}"> Modifier mot de passe </a><br>
-- Mes réservations en cours <br>
+- <a href="{{ path('reservation') }}">Mes réservations</a>
+- <a href="">Mes informations personnelles</a>
+
 
 
 {% endblock %}

@@ -76,6 +76,16 @@ footer>section>.badge>img{
     color: #bb5454;
 }
 
+.contact{
+    text-align: center;
+    padding-top: 10px;
+   
+}
+.contact>iframe{
+   
+    
+}
+
 @media screen and (max-width : 768px){
 footer>section{
     flex-direction: column;
