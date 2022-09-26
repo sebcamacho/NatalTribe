@@ -10,15 +10,26 @@
 {% endblock %}
 
 {% block body %}
+<main>
 <h1>Mon compte</h1>
 <p>Bienvenue <strong>{{ app.user.prenom }}</strong> dans votre compte. </p><br>
 
+<div class="container col-sm-6">
+<hr>
+
+<p>- <a href="{{ path('account_password') }}"> Modifier mot de passe </a></p>
+<p>- <a href="{{ path('reservation') }}">Mes réservations</a></p>
 
 <hr>
-- <a href="{{ path('account_password') }}"> Modifier mot de passe </a><br>
-- <a href="{{ path('reservation') }}">Mes réservations</a>
-- <a href="">Mes informations personnelles</a>
 
+<div class="g-col-6 g-col-md-4">
+<p>Mes informations personnelles</p>
+<hr>
+{{ form_start(form) }}
+{{ form_end(form) }}
+</div>
+</div>
+</main>
 
 
 {% endblock %}

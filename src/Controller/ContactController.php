@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
-use App\Repository\ContactRepository;
-use ContainerY6KcZqt\get_Console_Command_SecretsRemove_LazyService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,15 +22,18 @@ class ContactController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
 
+            
             $entityManager->persist($contact);
             $entityManager->flush();
-            // return $this->redirectToRoute('contact');
-            $this->addFlash('success', 'Merci de votre message, nous vous répondrons dans les meilleurs délais');
+            // return $this->redirectToRoute('formSend');
+            $this->addFlash("success", 'Merci de votre message, nous vous répondrons dans les meilleurs délais');
+            return $this->redirectToRoute('contact');
             
-        }
-
+            
+        };
+      
         
-
+        
         return $this->render('contact/index.html.twig', [
             'contactForm' => $form->createView()
         ]);

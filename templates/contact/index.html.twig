@@ -13,13 +13,13 @@
     <h1>Formulaire de contact</h1>
     <p>Une demande particulière ? Besoin de plus d'information ? N'hésitez pas à nous écrire via le formulaire. Nous vous répondrons dans les plus brefs délais.</p>
 
-    {% for message in app.flashes('notice') %}
-    <div class="alert alert-info"> {{ message }}</div>
+    {# {% for message in app.flashes('notice') %}
+    <div class="alert alert-info"> {{ message }}</div> #}
         
-    {% endfor %}
+    {# {% endfor %} #}
     <div class="contact">
     <div class="size">
-        <form action="">
+        
         {{ form_start(contactForm) }}
             {{ form_row(contactForm.nom) }} <br>
             {{ form_row(contactForm.email) }} <br>
@@ -29,13 +29,17 @@
 
             <button type="submit" class="btn btn-outline-primary">Envoyer</button>
         {{ form_end(contactForm) }}
-        </form>
+     
 
     </div>
     </div>
     <div class="contact">
     <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11314.217955093456!2d-0.5897097!3d44.8510055!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb70235aa651eb3f9!2sYoga%20Prenatal%20Bordeaux!5e0!3m2!1sfr!2sfr!4v1663839160793!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 </main>
+{% endblock %}
+{% block javascripts %}
+
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 {% endblock %}
