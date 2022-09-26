@@ -19,4 +19,10 @@ class HomeController extends AbstractController
     {
         return $this->render('home/cgu.html.twig');
     }
+
+    #[Route('/sitemap.xml', name: 'sitemap')]
+    public function siteMap(): Response
+    {
+        return $this->render('sitemap.xml');
+    }
 }

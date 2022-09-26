@@ -1,0 +1,15 @@
+User-agent: *
+Disallow: /src
+Disallow: /bin
+Disallow: /config
+Disallow: /migrations
+Disallow: /tests
+Disallow: /translations
+Disallow: /var
+Disallow: /vendor
+Disallow: /templates/admin
+Disallow: /templates/bundles
+Disallow: /templates/calendar
+Disallow: /templates/shared
+
+Sitemap: https://ntribe-projet.sebastiencamacho.fr/sitemap.xml
